@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost:3307',
+	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'Guru2017',
 	'database' => 'hachi_alacarte_live_puri',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

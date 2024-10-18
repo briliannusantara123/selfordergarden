@@ -8,12 +8,11 @@ body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
   background-image: url("<?= base_url();?>assets/userkosong.png"), linear-gradient(rgba(25, 135, 84, 1), rgba(25, 135, 84, 1));
+  
   background-size: cover;
   background-position: center;
   
 }
-
-
 
 
 a {
@@ -268,7 +267,17 @@ h1{
 #icon {
   width:30%;
 }
-
+#reader {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            display: none; /* Initially hidden */
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
     <div id="loadingkonek"></div>
     <div class="wrapper fadeInDown">
@@ -285,11 +294,10 @@ h1{
     <form action="<?= base_url() ?>index.php/Login/log/<?= $nomeja ?>" method="post">
       <input type="password" id="login" class="fadeIn second" name="passcode" placeholder="Enter PassCode" required="">
       <button class="btn" style="color: white;margin-bottom: 20px; padding-right: 50px;padding-left: 50px; margin-top: 10px;background-color:#198754">Log In</button>
+       <!-- <button type="button" id="scan-btn">Open Camera to Scan</button> -->
     </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#"></a>
+    <div class="center">
+        <div id="reader"></div>
     </div>
 
   </div>
@@ -301,3 +309,51 @@ h1{
 <!-- Modal -->
 
     <?php $this->load->view('template/footer') ?>
+    <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+    <script>
+        // Get references to elements
+        const scanBtn = document.getElementById('scan-btn');
+        const readerDiv = document.getElementById('reader');
+
+        // Function to start the barcode scanner
+        function startScanner() {
+            readerDiv.style.display = "block";  // Show the scanner
+            const html5QrCode = new Html5Qrcode("reader");
+
+            html5QrCode.start({ facingMode: "environment" }, {
+                fps: 10,    // Frames per second
+                qrbox: { width: 250, height: 250 }  // Scanning box size
+            }, (decodedText, decodedResult) => {
+                console.log(`Scan result: ${decodedText}`);
+                
+                // Check if the result is a valid URL
+                if (isValidUrl(decodedText)) {
+                    // Redirect to the scanned URL
+                    window.location.href = decodedText;
+                } else {
+                    alert("Scanned text is not a valid URL.");
+                }
+                
+            }, (errorMessage) => {
+                console.log(`Scan error: ${errorMessage}`);
+            }).catch(err => {
+                console.error(`Unable to start scanning: ${err}`);
+            });
+        }
+
+        // Function to validate if the scanned text is a URL
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Event listener for the button click to start the scanner
+        scanBtn.addEventListener('click', () => {
+            startScanner();
+        });
+    </script>

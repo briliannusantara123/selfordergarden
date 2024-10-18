@@ -5,7 +5,7 @@ body, .main-container {
     justify-content: center;
     align-items: center;
     background-color: white;
-    height: 100vh; /* Pastikan kontainer memiliki tinggi penuh */
+    height: 90vh; /* Pastikan kontainer memiliki tinggi penuh */
     margin: 0;
     flex-direction: column; /* Mengatur elemen secara vertikal */
 }

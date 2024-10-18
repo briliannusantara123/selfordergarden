@@ -182,17 +182,19 @@
             <div class="container addorder" style="display: none;">
                 <div class="row">
                     <div class="col-6">
-                        <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                            <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;font-weight: bold;">Order Food</span>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
-                    <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 19px;font-weight: bold;">Order Beverage</span>
-                </a>
-                    </div>
+    <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
+        <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
+        <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;">Food</span>
+    </a>
+</div>
+
+<div class="col-6">
+    <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
+        <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
+        <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;">Beverage</span>
+    </a>
+</div>
+
                 </div>  
             </div>
             <div class="containerfooter" style="padding: 10px;">
