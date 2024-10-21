@@ -10,6 +10,24 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 170px;
     }
+    .cart-container {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+        margin-top: 60px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .cartadd-container {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
     label {
         color: grey;
         font-size: 18px;
@@ -87,7 +105,57 @@
                                 <h6 style="font-size: 20px;"><strong><?= $i->description ?></strong></h6>
                                 <div class="price">Rp <?= number_format($i->unit_price) ?></div>
                                 <h6 style="color: grey"><?= $i->od ?></h6>
-                                <h6 style="color: grey"><?= $i->ad ?></h6>
+                                <!-- <?php if ($i->ad): ?>
+                                    <h6 style="color: grey"><?= $i->ad ?>
+                                    <?php if ($i->harga_weekday == 0): ?>
+                                        ( Free )
+                                        <input type="hidden" id="add_price" name="add_price[]" value="0">
+                                      <?php elseif ($i->harga_weekend == 0): ?>
+                                        ( Free )
+                                        <input type="hidden" id="add_price" name="add_price[]" value="0">
+                                      <?php elseif ($i->harga_holiday == 0): ?>
+                                        ( Free )
+                                        <input type="hidden" id="add_price" name="add_price[]" value="0">
+                                      <?php else: ?>
+                                        <?php 
+                                            $hr = date('l');
+                                            $date = date('Y-m-d');
+                                            $time = date('H:i:s');  
+                                            $holiday = $this->Item_model->get_holiday($date);
+                                            $waktu = $this->db->order_by('id',"desc")
+                                            ->limit(1)
+                                            ->get('sh_m_setup')
+                                            ->row('item_time_check');
+                                        ?>
+                                        <?php if ( $holiday == NULL): ?>
+                                           <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
+                                            <?php else: ?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
+                                          <?php   endif ?>
+                                        <?php  else: ?>
+                                          <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
+                                        <?php elseif ($holiday->tipe == 0) :?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
+                                        <?php elseif ($holiday->tipe == 1 && $time >= $waktu) :?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
+                                        <?php elseif ($holiday->tipe == 1 && $time <= $waktu) :?>
+                                            ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
+                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
+                                        <?php else: ?>
+                                          ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
+                                          <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
+                                        <?php endif ?>
+                                        <?php endif ?>
+                                      <?php endif ?>
+                                </h6>
+                                <?php endif ?> -->
                                 <h6 style="color: grey"><?= $i->extra_notes ?></h6>
                             </div>
                         </div>
@@ -118,7 +186,7 @@
                                 <input type="hidden" name="harga[]" value="<?= $i->unit_price ?>">
                                 <input type="hidden" name="pesan[]" value="<?= $i->extra_notes ?>">
                                 <input type="hidden" name="options[]" value="<?= $i->od ?>">
-                                <input type="hidden" name="addons[]" value="<?= $i->ad ?>">
+                                <!-- <input type="hidden" name="addons[]" value="<?= $i->ad ?>"> -->
                                 <input type="hidden" name="id[]" value="<?= $i->id ?>" id="id">
                                 <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
                                 <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
@@ -128,9 +196,68 @@
 
                         </div>
                     </div>
+
+
                 <?php endforeach ?>
 
             </div>
+            <?php if ($itemadd): ?>
+                <div class="cartadd-container">
+                <div class="row">
+                    <div class="col-6">
+                        <h5><strong><?= $jumlahadd ?> item add on in cart</strong></h5>
+                    </div>
+                    <div class="col-6" style="text-align: right;">   
+                        <a href="<?= base_url() ?>index.php/cart/cancel_order/<?= $nomeja ?>/<?= $cek ?>/<?= $sub ?>/add" class="btn btn-danger">Cancel AddOn</a>
+                    </div>
+                </div>  
+                <?php foreach ($itemadd as $i): ?>
+                    <div class="item row align-items-center mb-3">
+                        <div class="col-8">
+                            <div class="item-details">
+                                <h6 style="font-size: 20px;"><strong><?= $i->description ?></strong></h6>
+                                <div class="price">Rp <?= number_format($i->unit_price) ?></div>
+                                <h6 style="color: grey"><?= $i->od ?></h6>
+                                <h6 style="color: grey"><?= $i->extra_notes ?></h6>
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <?php if ($i->image_path): ?>
+                                <img src="<?= $i->image_path ?>" class="img-fluid" style="width: 100px; height: auto; object-fit: cover;">
+                            <?php else: ?>
+                                <img src="<?= base_url();?>assets/noimage.jpg" class="img-fluid" style="width: 100px; height: auto; object-fit: cover;">
+                            <?php endif ?>
+                            <div class="quantity-control d-flex align-items-center mt-2">
+                                <button type="button" class="btn btn-success kurang-btn" style="color: white;height: 35px; display: none;">-</button>
+                                <a href="<?= base_url() ?>index.php/cart/delete/<?= $i->id ?>/<?= $nomeja ?>/nonpaket/<?= $cek ?>/<?= $sub ?>" class="remove-item" style="margin-top: 5px; display: none;">
+                                    <i class="bi bi-trash" style="font-size: 35px"></i>
+                                </a>
+                                
+                                <span class="hasil" style="font-size: 20px; margin: 0 10px;"><?= $i->qty ?></span>
+                                <input type="hidden" name="qty[]" class="qty" value="<?= $i->qty ?>">
+                                <input type="hidden" name="nama[]" value="<?= $i->description ?>">
+                                <input type="hidden" name="cek[]" value="<?= $i->as_take_away ?>">
+                                <input type="hidden" name="qta[]" value="<?= $i->qty_take_away ?>">
+                                <input type="hidden" name="harga[]" value="<?= $i->unit_price ?>">
+                                <input type="hidden" name="pesan[]" value="<?= $i->extra_notes ?>">
+                                <input type="hidden" name="options[]" value="<?= $i->od ?>">
+                                <!-- <input type="hidden" name="addons[]" value="<?= $i->ad ?>"> -->
+                                <input type="hidden" name="id[]" value="<?= $i->id ?>" id="id">
+                                <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
+                                <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
+                                
+                                <button type="button" class="btn btn-success tambah-btn" style="color: white;height: 35px;">+</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+                <?php endforeach ?>
+
+            </div>
+            <?php endif ?>
+            
             <div class="card-total">
                 <div class="total">
                     <div class="row">
@@ -138,15 +265,15 @@
                             <label>Subtotal</label>
                         </div>
                         <div class="col-6">
-                            <label class="float-end">Rp <?= number_format($total) ?></label>
+                            <label class="float-end subtotal-label">Rp <?= number_format($total) ?></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label>Service Charge 5%</label>
+                            <label>SC 5%</label>
                         </div>
                         <div class="col-6">
-                            <label class="float-end">Rp <?= number_format($hitungbayar->sc) ?></label>
+                            <label class="float-end sc-label">Rp <?= number_format($hitungbayar->sc) ?></label>
                         </div>
                     </div>
                     <div class="row">
@@ -154,7 +281,7 @@
                             <label>PB1 10%</label>
                         </div>
                         <div class="col-6">
-                            <label class="float-end">Rp <?= number_format($hitungbayar->ppn) ?></label>
+                            <label class="float-end ppn-label">Rp <?= number_format($hitungbayar->ppn) ?></label>
                         </div>
                     </div>
                     <hr>
@@ -163,9 +290,10 @@
                             <strong>Total</strong>
                         </div>
                         <div class="col-6">
-                            <strong class="float-end">Rp <?= number_format($total+$hitungbayar->sc+$hitungbayar->ppn) ?></strong>
+                            <strong class="float-end total-label">Rp <?= number_format($total+$hitungbayar->sc+$hitungbayar->ppn) ?></strong>
                         </div>
                     </div>
+
                 </div>
             </div>
         <?php else: ?>
@@ -200,7 +328,7 @@
             <div class="containerfooter" style="padding: 10px;">
                 <button type="button" class="btn btn-warning add-btn" style="padding: 15px;font-size: 17px;color: white;"><i class="bi bi-plus-circle"></i> <strong>Add to Order</strong></button>
                 <?php if ($item): ?>
-                    <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Checkout</strong></button>
+                    <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Order Now</strong></button>
                 <?php endif ?>
             </div>
         </footer>
@@ -314,8 +442,30 @@
             .then(data => {
                 if (data.success) {
                     console.log('Cart updated successfully');
+                    updateTotal();
                 } else {
                     console.error('Failed to update cart:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        function updateTotal() {
+            fetch('<?= base_url() ?>index.php/cart/get_total', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update total, service charge, PPN di UI
+                    document.querySelector('.subtotal-label').innerText = 'Rp ' + data.total_formatted;
+                    document.querySelector('.sc-label').innerText = 'Rp ' + data.sc_formatted;
+                    document.querySelector('.ppn-label').innerText = 'Rp ' + data.ppn_formatted;
+                    document.querySelector('.total-label').innerText = 'Rp ' + data.grand_total_formatted;
+                } else {
+                    console.error('Failed to fetch total:', data.message);
                 }
             })
             .catch(error => console.error('Error:', error));

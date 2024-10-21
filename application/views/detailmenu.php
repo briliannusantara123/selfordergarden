@@ -98,10 +98,11 @@
       <p class="description"><?= $item->product_info ?></p>
       <?php if ($option): ?>
         <h5 class="mt-1"><?= $item->description ?> Options</h5>
+        <label style="margin-left: 5px;margin-bottom: 10px; color: #198754">Please select at least one Options</label>
         <?php foreach($option as $o): ?>
           <div class="row">
             <div class="col-1">
-              <input type="checkbox" name="options[]" value="<?= $o->id ?>" onclick="onlyOne(this)" class="custom-checkbox">
+              <input type="checkbox" name="options[]" value="<?= $o->id ?>" onclick="onlyOne(this)" class="custom-checkbox option-checkbox">
             </div>
             <div class="col-8">
               <?= $o->description ?>
@@ -114,57 +115,52 @@
     <?php endif ?>
 
     <?php if ($addon): ?>
-        <h5 class="mt-1">Add Ons</h5>
-        <?php foreach ($addon as $add): ?>
+      <h5 class="mt-1">Add Ons</h5>
+      <?php foreach ($addon as $add): ?>
           <div class="row">
-            <div class="col-1">
-              <input type="checkbox" name="addons[]" value="<?= $add->no ?>" onclick="onlyOneADD(this)" class="custom-checkbox">
-            </div>
-            <div class="col-8">
-              <?= $add->description ?>
-            </div>
-            <div class="col-3">
-              <?php if ($add->harga_weekday == 0): ?>
-                  <div>Free</div>
-                <?php elseif ($add->harga_weekend == 0): ?>
-                  <div>Free</div>
-                <?php elseif ($add->harga_holiday == 0): ?>
-                  <div>Free</div>
-                <?php else: ?>
-                  <?php 
-                      $hr = date('l');
-                      $date = date('Y-m-d');
-                      $time = date('H:i:s');  
-                      $holiday = $this->Item_model->get_holiday($date);
-                      $waktu = $this->db->order_by('id',"desc")
-                      ->limit(1)
-                      ->get('sh_m_setup')
-                      ->row('item_time_check');
-                  ?>
-                  <?php if ( $holiday == NULL): ?>
-                     <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
-                      <div>+Rp <?= number_format($add->harga_weekend) ?></div>
-                      <?php else: ?>
-                      <div>+Rp <?= number_format($add->harga_weekday) ?></div>
-                    <?php   endif ?>
-                  <?php  else: ?>
-                    <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
-                      <div>+Rp <?= number_format($add->harga_weekend) ?></div>
-                  <?php elseif ($holiday->tipe == 0) :?>
-                      <div>+Rp <?= number_format($add->harga_weekend) ?></div>
-                  <?php elseif ($holiday->tipe == 1 && $time >= $waktu) :?>
-                      <div>+Rp <?= number_format($add->harga_weekend) ?></div>
-                  <?php elseif ($holiday->tipe == 1 && $time <= $waktu) :?>
-                      <div>+Rp <?= number_format($add->harga_weekday) ?></div>
+              <div class="col-1">
+                  <input type="checkbox" name="addons[]" value="<?= $add->no ?>" class="custom-checkbox">
+              </div>
+              <div class="col-8">
+                  <?= $add->description ?>
+              </div>
+              <div class="col-3">
+                  <?php if ($add->harga_weekday == 0 || $add->harga_weekend == 0 || $add->harga_holiday == 0): ?>
+                      <div>Free</div>
+                      <input type="hidden" name="unit_price_add" value="0">
                   <?php else: ?>
-                    <div>+Rp <?= number_format($add->harga_weekday) ?></div>
+                      <?php 
+                          $hr = date('l');
+                          $date = date('Y-m-d');
+                          $time = date('H:i:s');  
+                          $holiday = $this->Item_model->get_holiday($date);
+                          $waktu = $this->db->order_by('id',"desc")
+                                            ->limit(1)
+                                            ->get('sh_m_setup')
+                                            ->row('item_time_check');
+                      ?>
+                      <?php if ($holiday == NULL): ?>
+                          <?php if ($hr == "Saturday" || $hr == "Sunday") : ?>
+                              <div>+Rp <?= number_format($add->harga_weekend) ?></div>
+                              <input type="hidden" name="unit_price_add" value="<?= $add->harga_weekend ?>">
+                          <?php else: ?>
+                              <div>+Rp <?= number_format($add->harga_weekday) ?></div>
+                              <input type="hidden" name="unit_price_add" value="<?= $add->harga_weekday ?>">
+                          <?php endif ?>
+                      <?php else: ?>
+                          <?php if ($hr == "Saturday" || $hr == "Sunday" || $holiday->tipe == 0 || ($holiday->tipe == 1 && $time >= $waktu)) : ?>
+                              <div>+Rp <?= number_format($add->harga_weekend) ?></div>
+                              <input type="hidden" name="unit_price_add" value="<?= $add->harga_weekend ?>">
+                          <?php else: ?>
+                              <div>+Rp <?= number_format($add->harga_weekday) ?></div>
+                              <input type="hidden" name="unit_price_add" value="<?= $add->harga_weekday ?>">
+                          <?php endif ?>
+                      <?php endif ?>
                   <?php endif ?>
-                  <?php endif ?>
-                <?php endif ?>
-            </div>
+              </div>
           </div>
-        <?php endforeach; ?>
-    <?php endif ?>
+      <?php endforeach; ?>
+  <?php endif ?>
 
       
         
@@ -243,4 +239,29 @@
         });
     }
   </script>
-<<?php $this->load->view('template/footer') ?>
+  <?php if ($option): ?>
+    <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const checkboxes = document.querySelectorAll('.option-checkbox');
+        let isChecked = false;
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        });
+
+        if (!isChecked) {
+            event.preventDefault();  // Prevent form submission
+            var isi = 'Please Select at Least One Options';
+            Swal.fire({
+            title: 'Notification!',
+            text: isi,
+            icon: 'warning',
+            confirmButtonColor: "#198754",
+            confirmButtonText: 'OK'
+            })
+        }
+    });
+  </script>    
+  <?php endif ?>
+<?php $this->load->view('template/footer') ?>

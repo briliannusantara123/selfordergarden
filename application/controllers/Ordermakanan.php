@@ -437,7 +437,7 @@ class Ordermakanan extends CI_Controller {
   			->limit(1)
   			->get('sh_m_cabang')
   			->row('id');
-		
+
 		$data = [
 				'item_code' => $this->input->post('no'),
 				'id_trans' => $id_trans->id,
@@ -452,8 +452,8 @@ class Ordermakanan extends CI_Controller {
 				'entry_date' => date('Y-m-d'),
 				'user_order_id' => $this->session->userdata('user_order_id'),
 				'options' => $op,
-				'addons' => $ad,
-			];
+				'addons' => 0,
+		];
 			if ($qty == 0) {
 				$this->session->set_flashdata('error','Order Gagal! Tambahkan jumlah pesan!');
 				redirect($_SERVER['HTTP_REFERER']);
@@ -475,6 +475,28 @@ class Ordermakanan extends CI_Controller {
 			  	}
 			  }else{
 			  	$result = $this->db->insert('sh_cart',$data);
+			  }
+			  if ($result) {
+			  	$IA = $this->Item_model->GetItemADD($ad);
+		  		if ($IA) {
+		  			$dataADD = [
+						'item_code' => $IA->no,
+						'id_trans' => $id_trans->id,
+						'id_customer' => $this->session->userdata('id'),
+						'qty' => 1, 
+						'cabang' => $cabang,
+						'unit_price' => $this->input->post('unit_price_add'),
+						'description' => $IA->description,
+						'entry_by' => $this->session->userdata('username'),
+						'id_table' => $this->session->userdata('nomeja'),
+						'extra_notes' => '',
+						'entry_date' => date('Y-m-d'),
+						'user_order_id' => $this->session->userdata('user_order_id'),
+						'options' => '',
+						'addons' => 1,
+					];
+					$this->db->insert('sh_cart',$dataADD);
+		  		}
 			  }
 			  $id_customer = $this->session->userdata('id');
 					$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();

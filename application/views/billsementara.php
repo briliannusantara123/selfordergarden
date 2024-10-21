@@ -409,6 +409,7 @@
         </div>
     </div>
     <div class="main-content">
+        <h2 style="color: grey;">Order Menu</h2>
         <?php foreach ($order_bill_line as $i): ?>
             <div class="row">
                 <div class="col-3">

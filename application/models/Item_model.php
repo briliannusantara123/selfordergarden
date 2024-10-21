@@ -672,17 +672,40 @@ public function get_info_item($item_code, $data)
 		    $uoi = $this->session->userdata('user_order_id'); // Mengambil user_order_id dari session
 
 		    // Menggunakan Query Builder untuk memilih data yang diperlukan
-		    $this->db->select('i.description as ad, o.description as od, m.image_path, m.need_stock, d.*');
+		    // $this->db->select('i.harga_weekday,i.harga_weekend,i.harga_holiday,i.description as ad, o.description as od, m.image_path, m.need_stock, d.*');
+		    $this->db->select('o.description as od, m.image_path, m.need_stock, d.*');
 		    $this->db->from('sh_cart d');
 		    $this->db->join('sh_m_item m', 'm.no = d.item_code', 'left'); // Menggunakan 'left' join jika diperlukan
 		    $this->db->join('sh_m_item_option o', 'o.id = d.options', 'left');
-		    $this->db->join('sh_m_item i', 'i.no = d.addons', 'left');
+		    // $this->db->join('sh_m_item i', 'i.no = d.addons', 'left');
 
 		    // Menggunakan where clause yang lebih aman
 		    $this->db->where('DATE(d.entry_date)', $date); // Mengambil entry_date berdasarkan tanggal
 		    $this->db->where('d.id_customer', $ic); // Memastikan bahwa id_customer sama dengan parameter yang diberikan
 		    $this->db->where('d.user_order_id', $uoi); // Memastikan bahwa user_order_id sesuai dengan session
+		    $this->db->where('d.addons', 0);
+		    // Eksekusi query
+		    $query = $this->db->get();
+		    return $query; // Mengembalikan hasil sebagai array objek
+		}
+		public function cartadd($ic)
+		{
+		    $date = date('Y-m-d'); // Mengambil tanggal hari ini
+		    $uoi = $this->session->userdata('user_order_id'); // Mengambil user_order_id dari session
 
+		    // Menggunakan Query Builder untuk memilih data yang diperlukan
+		    // $this->db->select('i.harga_weekday,i.harga_weekend,i.harga_holiday,i.description as ad, o.description as od, m.image_path, m.need_stock, d.*');
+		    $this->db->select('o.description as od, m.image_path, m.need_stock, d.*');
+		    $this->db->from('sh_cart d');
+		    $this->db->join('sh_m_item m', 'm.no = d.item_code', 'left'); // Menggunakan 'left' join jika diperlukan
+		    $this->db->join('sh_m_item_option o', 'o.id = d.options', 'left');
+		    // $this->db->join('sh_m_item i', 'i.no = d.addons', 'left');
+
+		    // Menggunakan where clause yang lebih aman
+		    $this->db->where('DATE(d.entry_date)', $date); // Mengambil entry_date berdasarkan tanggal
+		    $this->db->where('d.id_customer', $ic); // Memastikan bahwa id_customer sama dengan parameter yang diberikan
+		    $this->db->where('d.user_order_id', $uoi); // Memastikan bahwa user_order_id sesuai dengan session
+		    $this->db->where('d.addons', 1);
 		    // Eksekusi query
 		    $query = $this->db->get();
 		    return $query; // Mengembalikan hasil sebagai array objek
@@ -942,6 +965,13 @@ public function get_info_item($item_code, $data)
 				$this->db->where('o.item_code',$item_code);
 				$this->db->where('o.type','option');
 				return $this->db->get()->result();
+		}
+		public function GetItemADD($item_code)
+		{
+			$this->db->select('o.*');
+			$this->db->from('sh_m_item o');
+			$this->db->where('o.no',$item_code);
+			return $this->db->get()->row();
 		}
 		// public function get_qty()
 		// {

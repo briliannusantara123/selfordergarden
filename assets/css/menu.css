@@ -293,15 +293,7 @@ footer nav a span {
     z-index: 5;
 }
 
-.cart-container {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    max-width: 700px;
-    margin: auto;
-    margin-top: 60px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 .item {
     display: flex;

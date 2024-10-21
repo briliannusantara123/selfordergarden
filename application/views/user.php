@@ -136,7 +136,7 @@
             <a href="<?= base_url() ?><?= $url ?>" style="text-decoration: none; color: black;">
                 <i class="bi bi-arrow-left" style="font-size: 30px; margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
             </a>
-            <h2><strong>Proflie</strong></h2>
+            <h2><strong>Profile</strong></h2>
         </div>
     </header>
 

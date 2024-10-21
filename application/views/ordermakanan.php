@@ -24,7 +24,7 @@
                 <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>" style="text-decoration: none; color: black;">
                     <i class="bi bi-arrow-left" style="font-size: 30px;margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
                 </a>
-                <h2 style="margin: 0; margin-left: 5px;"><strong>Order Food</strong></h2>
+                <h2 style="margin: 0; margin-left: 5px;"><strong>Food</strong></h2>
             </div>
             <div class="profile">
                 <a href="<?= base_url() ?>index.php/Billsementara/home/<?= $nomeja ?>" style="color: black"><i class="bi bi-file-earmark-text" style="font-size: 25px;"></i></a>

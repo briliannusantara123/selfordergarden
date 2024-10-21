@@ -137,6 +137,12 @@
     .profile-img-dua {
         width: 70%;margin-top: 35px;
     }
+    @media (min-width: 768px) { /* Misal 768px dianggap sebagai batas layar non-HP */
+        .profile-img, 
+        .profile-img-dua {
+            width: 30%;margin-top: 35px;
+        }
+    }
     .bulat {
         background-color: rgba(11, 222, 124, 0.3);
         width: 360px;
@@ -261,14 +267,14 @@
             <div class="col-6">
                 <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;font-weight: bold;">Order Food</span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;">Order Food</span>
                 </a>
             </div>
 
             <div class="col-6">
                 <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 19px;font-weight: bold;">Order Beverage</span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;">Order Beverage</span>
                 </a>
             </div>
         </div>
@@ -276,13 +282,13 @@
             <div class="col-6">
                 <a href="<?php echo base_url() ?>index.php/Kasir_waitress/memanggil/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/call_waitress.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;"><strong>Call Waitress</strong></span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Call Waitress</strong></span>
                 </a>
             </div>
             <div class="col-6">
                 <a href="<?php echo base_url() ?>index.php/Kasir_waitress/meminta/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/memintabill.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;"><strong>Request Bill</strong></span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Request Bill</strong></span>
                 </a>
             </div>
         </div>
@@ -290,13 +296,13 @@
             <div class="col-6">
                 <a href="<?php echo base_url() ?>index.php/Review/form/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/note.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;"><strong>Feedback and Suggestions</strong></span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Feedback and Suggestions</strong></span>
                 </a>
             </div>
             <div class="col-6">
                 <a href="<?= base_url() ?>index.php/Billsementara/home/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/bill.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 20px;"><strong>Bill Preview</strong></span>
+                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Bill Preview</strong></span>
                 </a>
             </div>
         </div>

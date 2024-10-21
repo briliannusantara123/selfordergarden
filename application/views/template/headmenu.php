@@ -40,7 +40,7 @@
         font-size: 25px;
         z-index: 7; /* Pastikan lebih tinggi dari .loadingkonek */
         left: 50%; /* Pusatkan secara horizontal */
-        top: calc(50% + 60px); /* Jarak dari loadingkonek, sesuaikan jika perlu */
+        top: calc(50% + 35px); /* Jarak dari loadingkonek, sesuaikan jika perlu */
         transform: translateX(-50%); /* Pusatkan elemen secara horizontal */
     }
     .load{
@@ -52,8 +52,8 @@
       }
 
        #loading{
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border: solid 5px #ccc;
         border-top-color: #198754;
         border-radius: 100%;

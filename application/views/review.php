@@ -3,18 +3,18 @@
 if(isset($_SERVER['HTTP_REFERER'])) {
     $previous = $_SERVER['HTTP_REFERER'];
 } ?>
-<div class="head">
-        <header>
-            <div style="display: flex; align-items: center;">
-                <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>" style="text-decoration: none; color: black;">
-                    <i class="bi bi-arrow-left" style="font-size: 30px;margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
-                </a>
-                <h2 style="margin: 0; margin-left: 5px;"><strong>Feedback and Suggestions</strong></h2>
-            </div>
-        </header>
-    </div>
+<div class="head" style="margin-bottom: 200px;">
+    <header>
+        <div style="display: flex; align-items: center;">
+            <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>" style="text-decoration: none; color: black;">
+                <i class="bi bi-arrow-left" style="font-size: 30px;margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
+            </a>
+            <h2 style="margin: 0; margin-left: 5px;"><strong>Feedback and Suggestions</strong></h2>
+        </div>
+    </header>
+</div>
 <form action="<?= base_url() ?>index.php/review/save/<?= $nomeja;?>" method="post">
-  <div style="padding-left: 10px; padding-right:15px;margin-top: 60px;">
+  <div style="padding-left: 10px; padding-right:15px; margin-top: 60px; margin-bottom: 150px;"> <!-- Tambahkan margin-bottom di sini -->
     <table width="100%" border="0">
     <?php foreach($category as $cat){ ?>
       <tr>
@@ -35,9 +35,9 @@ if(isset($_SERVER['HTTP_REFERER'])) {
     </table>
   </div>
   <footer>
-            <div class="containerfooter" style="padding: 10px;">
-                <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Send</strong></button>
-            </div>
-        </footer>
+    <div class="containerfooter" style="padding: 10px;">
+        <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Send</strong></button>
+    </div>
+  </footer>
 
 <?php $this->load->view('template/footer') ?>

@@ -63,13 +63,17 @@ function __construct()
 		$url = $sub.'#'.$sharp;
 		$id_customer = $this->session->userdata('id');
 		$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();
-		$query = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->get('sh_cart');
+		$query = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->where('addons',0)->get('sh_cart');
 		$jumlahData = $query->num_rows();
+		$queryadd = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->where('addons',1)->get('sh_cart');
+		$jumlahDataadd = $queryadd->num_rows();
 		$data['total'] = $this->Item_model->totalSubOrder($nomeja,$id_customer,$uoi,$id_trans->id);
-		$data['hitungbayar'] = $this->Item_model->totalbayar($id_trans->id);;
+		$data['hitungbayar'] = $this->Item_model->totalbayar($id_trans->id);
 		$data['item'] = $this->Item_model->cart($id_customer)->result();
+		$data['itemadd'] = $this->Item_model->cartadd($id_customer)->result();
 		$data['nomeja'] = $nomeja;
 		$data['jumlah'] = $jumlahData;
+		$data['jumlahadd'] = $jumlahDataadd;
 		$data['sca'] = $this->Item_model->sub_category_awal();
 		$data['scm'] = $this->Item_model->sub_category_minuman_awal();
 		if ($cek == 'Makanan') {
@@ -103,6 +107,32 @@ function __construct()
 		$data['no'] = $no;
 		$this->load->view('cart',$data);
 	}
+	public function get_total() {
+	    $uoi = $this->session->userdata('user_order_id');
+		$id_customer = $this->session->userdata('id');
+		$nomeja = $this->session->userdata('nomeja');
+		$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();
+
+	    $total = $this->Item_model->totalSubOrder($nomeja,$id_customer,$uoi,$id_trans->id);
+	    $hitungbayar = $this->Item_model->totalbayar($id_trans->id);
+	    $sc = $hitungbayar->sc;  // Contoh perhitungan SC 5%
+	    $ppn = $hitungbayar->ppn; // Contoh perhitungan PPN 10%
+	    $grand_total = $total + $sc + $ppn;
+
+	    // Format hasilnya
+	    $data = [
+	        'success' => true,
+	        'total' => $total,
+	        'hitungbayar' => $hitungbayar,
+	        'total_formatted' => number_format($total),
+	        'sc_formatted' => number_format($sc),
+	        'ppn_formatted' => number_format($ppn),
+	        'grand_total_formatted' => number_format($grand_total),
+	    ];
+
+	    echo json_encode($data);
+	}
+
 	public function create($nomeja,$cek,$sub)
 	{
 		$ic = $this->session->userdata('id');
@@ -694,16 +724,25 @@ function __construct()
 		}
 		redirect(base_url().$log);
 	}
-	public function cancel_order($nomeja,$cek,$sub)
+	public function cancel_order($nomeja,$cek,$sub,$add=NULL)
 	{
 		$ic = $this->session->userdata('id');
 		$uoi = $this->session->userdata('user_order_id');
 		$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $ic))->row();
-		$this->db->where('id_customer',$ic);
-		$this->db->where('id_table',$nomeja);
-		$this->db->where('id_trans',$id_trans->id);
-		$this->db->where('user_order_id',$uoi);
-    	$this->db->delete('sh_cart');
+		if ($add) {
+			$this->db->where('id_customer',$ic);
+			$this->db->where('id_table',$nomeja);
+			$this->db->where('id_trans',$id_trans->id);
+			$this->db->where('user_order_id',$uoi);
+			$this->db->where('addons',1);
+	    	$this->db->delete('sh_cart');
+		}else{
+			$this->db->where('id_customer',$ic);
+			$this->db->where('id_table',$nomeja);
+			$this->db->where('id_trans',$id_trans->id);
+			$this->db->where('user_order_id',$uoi);
+	    	$this->db->delete('sh_cart');
+		}
     	if ($cek == 'Makanan') {
 			$log = 'index.php/Cart/home/'.$nomeja.'/Makanan/'.$sub.'#'.preg_replace('/%20/', '_', $sub);
 		}elseif ($cek == 'Minuman') {
