@@ -173,25 +173,25 @@
 <?php endforeach; ?>
 <script type="text/javascript">
   let typingTimer;                // Variabel untuk timer
-let typingInterval = 500;       // Waktu jeda setelah selesai mengetik (500ms)
-let searchInput = document.getElementById('search');
+  let typingInterval = 500;       // Waktu jeda setelah selesai mengetik (500ms)
+  let searchInput = document.getElementById('search');
 
-// Event listener untuk mendeteksi pengguna mengetik
-searchInput.addEventListener('keyup', () => {
-    clearTimeout(typingTimer);   // Hapus timer sebelumnya
-    typingTimer = setTimeout(submitForm, typingInterval);  // Set timer baru
-});
+  // Event listener untuk mendeteksi pengguna mengetik
+  searchInput.addEventListener('keyup', () => {
+      clearTimeout(typingTimer);   // Hapus timer sebelumnya
+      typingTimer = setTimeout(submitForm, typingInterval);  // Set timer baru
+  });
 
-// Event listener untuk membatalkan submit jika masih mengetik
-searchInput.addEventListener('keydown', () => {
-    clearTimeout(typingTimer);   // Hapus timer jika masih mengetik
-});
+  // Event listener untuk membatalkan submit jika masih mengetik
+  searchInput.addEventListener('keydown', () => {
+      clearTimeout(typingTimer);   // Hapus timer jika masih mengetik
+  });
 
-// Fungsi untuk submit form
-function submitForm() {
-    document.getElementById('searchForm').submit();  // Submit form
-}
-
+  // Fungsi untuk submit form
+  function submitForm() {
+      document.getElementById('searchForm').submit();  // Submit form
+  }
+  
 
 </script>
 

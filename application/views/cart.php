@@ -105,57 +105,21 @@
                                 <h6 style="font-size: 20px;"><strong><?= $i->description ?></strong></h6>
                                 <div class="price">Rp <?= number_format($i->unit_price) ?></div>
                                 <h6 style="color: grey"><?= $i->od ?></h6>
-                                <!-- <?php if ($i->ad): ?>
-                                    <h6 style="color: grey"><?= $i->ad ?>
-                                    <?php if ($i->harga_weekday == 0): ?>
-                                        ( Free )
-                                        <input type="hidden" id="add_price" name="add_price[]" value="0">
-                                      <?php elseif ($i->harga_weekend == 0): ?>
-                                        ( Free )
-                                        <input type="hidden" id="add_price" name="add_price[]" value="0">
-                                      <?php elseif ($i->harga_holiday == 0): ?>
+
+                                <!-- <?php if ($itemadd): ?>
+                                    <?php foreach ($itemadd as $i): ?>
+                                            <h6 style="color: grey"><?= $i->description ?>
+                                    <?php if ($i->unit_price == 0): ?>
                                         ( Free )
                                         <input type="hidden" id="add_price" name="add_price[]" value="0">
                                       <?php else: ?>
-                                        <?php 
-                                            $hr = date('l');
-                                            $date = date('Y-m-d');
-                                            $time = date('H:i:s');  
-                                            $holiday = $this->Item_model->get_holiday($date);
-                                            $waktu = $this->db->order_by('id',"desc")
-                                            ->limit(1)
-                                            ->get('sh_m_setup')
-                                            ->row('item_time_check');
-                                        ?>
-                                        <?php if ( $holiday == NULL): ?>
-                                           <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
-                                            <?php else: ?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
-                                          <?php   endif ?>
-                                        <?php  else: ?>
-                                          <?php  if ($hr == "Saturday" || $hr == "Sunday") :?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
-                                        <?php elseif ($holiday->tipe == 0) :?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
-                                        <?php elseif ($holiday->tipe == 1 && $time >= $waktu) :?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekend) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekend ?>">
-                                        <?php elseif ($holiday->tipe == 1 && $time <= $waktu) :?>
-                                            ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
-                                            <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
-                                        <?php else: ?>
-                                          ( Rp&nbsp;<?= number_format($i->harga_weekday) ?> )
-                                          <input type="hidden" id="add_price" name="add_price[]" value="<?= $i->harga_weekday ?>">
-                                        <?php endif ?>
-                                        <?php endif ?>
+                                        ( Rp <?= number_format($i->unit_price) ?> )
                                       <?php endif ?>
+
                                 </h6>
+                                    <?php endforeach ?>
                                 <?php endif ?> -->
+
                                 <h6 style="color: grey"><?= $i->extra_notes ?></h6>
                             </div>
                         </div>
@@ -195,13 +159,46 @@
                             </div>
 
                         </div>
+                        <div class="col-8">
+                            <?php $addons = $this->Item_model->getADDONS($i->item_code); ?>
+                            <?php if ($addons): ?>
+                                <h6 style="text-align: center;"><strong>ADD ON</strong></h6>
+                                <?php foreach ($addons as $i): ?>
+                                    <div class="item row align-items-center mb-3">
+                                        <div class="col-8">
+                                            <div class="item-details">
+                                                <h6 style="font-size: 15px;color: grey"><strong><?= $i->description ?></strong></h6>
+                                                <div class="">Rp <?= number_format($i->unit_price) ?></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <div class="quantity-control d-flex align-items-center mt-2">
+                                                <button type="button" class="btn btn-success kurang-btn" style="color: white;height: 35px; display: none;">-</button>
+                                                <a href="<?= base_url() ?>index.php/cart/delete/<?= $i->id ?>/<?= $nomeja ?>/nonpaket/<?= $cek ?>/<?= $sub ?>" class="remove-item" style="margin-top: 5px; display: none;">
+                                                    <i class="bi bi-trash" style="font-size: 35px"></i>
+                                                </a>
+                                                <span class="hasil" style="font-size: 20px; margin: 0 10px;"><?= $i->qty ?></span>
+                                                <input type="hidden" name="qty[]" class="qty" value="<?= $i->qty ?>">
+                                                <input type="hidden" name="nama[]" value="<?= $i->description ?>">
+                                                <input type="hidden" name="harga[]" value="<?= $i->unit_price ?>">
+                                                <input type="hidden" name="id[]" value="<?= $i->id ?>" id="id">
+                                                <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
+                                                <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
+                                                
+                                                <button type="button" class="btn btn-success tambah-btn" style="color: white;height: 35px;">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </div>
                     </div>
 
 
                 <?php endforeach ?>
 
             </div>
-            <?php if ($itemadd): ?>
+            <!-- <?php if ($itemadd): ?>
                 <div class="cartadd-container">
                 <div class="row">
                     <div class="col-6">
@@ -241,7 +238,6 @@
                                 <input type="hidden" name="harga[]" value="<?= $i->unit_price ?>">
                                 <input type="hidden" name="pesan[]" value="<?= $i->extra_notes ?>">
                                 <input type="hidden" name="options[]" value="<?= $i->od ?>">
-                                <!-- <input type="hidden" name="addons[]" value="<?= $i->ad ?>"> -->
                                 <input type="hidden" name="id[]" value="<?= $i->id ?>" id="id">
                                 <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
                                 <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
@@ -256,7 +252,7 @@
                 <?php endforeach ?>
 
             </div>
-            <?php endif ?>
+            <?php endif ?> -->
             
             <div class="card-total">
                 <div class="total">

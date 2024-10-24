@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAISUKI VETERAN | Self Order</title>
+    <title>Hachi Garden | Self Order</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <!-- Google Font: Source Sans Pro -->

@@ -973,6 +973,24 @@ public function get_info_item($item_code, $data)
 			$this->db->where('o.no',$item_code);
 			return $this->db->get()->row();
 		}
+		public function getADDONS($item_code)
+		{
+			$date = date('Y-m-d'); 
+		    $uoi = $this->session->userdata('user_order_id');
+		    $ic = $this->session->userdata('id'); 
+
+		    $this->db->select('m.image_path, m.need_stock, d.*');
+		    $this->db->from('sh_cart d');
+		    $this->db->join('sh_m_item m', 'm.no = d.item_code', 'left');
+		    $this->db->where('DATE(d.entry_date)', $date); 
+		    $this->db->where('d.id_customer', $ic); 
+		    $this->db->where('d.user_order_id', $uoi);
+		    $this->db->where('d.addons', 1);
+		    $this->db->where('d.item_code_header', $item_code);
+		    
+		    $query = $this->db->get()->result();
+		    return $query; 
+		}
 		// public function get_qty()
 		// {
 		// 	$ic = $this->session->userdata('id');

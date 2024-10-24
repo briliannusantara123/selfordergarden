@@ -140,7 +140,7 @@
     @media (min-width: 768px) { /* Misal 768px dianggap sebagai batas layar non-HP */
         .profile-img, 
         .profile-img-dua {
-            width: 30%;margin-top: 35px;
+            display: none;
         }
     }
     .bulat {

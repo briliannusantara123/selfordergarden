@@ -18,6 +18,7 @@ class Login extends CI_Controller
 		}
 		
 	}
+	
 	public function log($nomeja=NULL)
 	{
 		// $this->form_validation->set_rules('passcode','passcode','trim|required');
@@ -197,6 +198,59 @@ class Login extends CI_Controller
 		$this->session->set_flashdata('error','You have logged out because you changed tables');
 		
 		redirect('login/log/'.$nm);
+	}
+
+	//ADMIN
+	public function admin()
+	{
+		$this->form_validation->set_rules('passcode','passcode','trim|required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('admin/loginAdmin');	
+		}else{
+			$this->loginadmin();
+		}
+		
+	}
+	public function loginadmin() {
+        // Ambil input dari form
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        
+        // Cari user berdasarkan username
+        $this->db->where('username', $username);
+        $user = $this->db->get('sh_user_so')->row();
+        
+        if ($user) {
+            // Verifikasi password yang diinput dengan hash yang ada di database
+            if (password_verify($password, $user->password)) {
+            	$data = [
+					'username' => $user->username,
+					'level' => $user->level,
+					'id' => $user->id,
+				];
+				$this->session->set_userdata($data);
+                $this->session->set_flashdata('success','Login Successfully');
+				redirect('Admin');
+            } else {
+                $this->session->set_flashdata('error','Username atau password salah');
+				$this->load->view('admin/loginAdmin');	
+            }
+        } else {
+            // User tidak ditemukan
+            echo "Username tidak ditemukan!";
+        }
+    }
+	public function logoutAdmin($nm=null,$pm=NULL)
+	{
+		$cs = $this->session->userdata('id');
+		$id_customer = $this->session->userdata('id');
+		$ip_address = $this->input->ip_address();
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('level');
+		$this->session->unset_userdata('id');
+		$this->session->set_flashdata('success','Successfully Logged Out');
+		redirect('login/admin');
 	}
 }
  ?>

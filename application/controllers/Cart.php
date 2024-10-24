@@ -63,14 +63,13 @@ function __construct()
 		$url = $sub.'#'.$sharp;
 		$id_customer = $this->session->userdata('id');
 		$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();
-		$query = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->where('addons',0)->get('sh_cart');
+		$query = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->get('sh_cart');
 		$jumlahData = $query->num_rows();
 		$queryadd = $this->db->where('id_table',$nomeja)->where('id_customer',$id_customer)->where('entry_date',date('Y-m-d'))->where('user_order_id',$uoi)->where('id_trans',$id_trans->id)->where('addons',1)->get('sh_cart');
 		$jumlahDataadd = $queryadd->num_rows();
 		$data['total'] = $this->Item_model->totalSubOrder($nomeja,$id_customer,$uoi,$id_trans->id);
 		$data['hitungbayar'] = $this->Item_model->totalbayar($id_trans->id);
 		$data['item'] = $this->Item_model->cart($id_customer)->result();
-		$data['itemadd'] = $this->Item_model->cartadd($id_customer)->result();
 		$data['nomeja'] = $nomeja;
 		$data['jumlah'] = $jumlahData;
 		$data['jumlahadd'] = $jumlahDataadd;
@@ -698,15 +697,22 @@ function __construct()
 	}
 	public function delete($id,$nomeja,$cekpaket=null,$cek,$sub)
 	{
+		$ic = $this->session->userdata('id');$it = $this->session->userdata('id_table');
+		$uoi = $this->session->userdata('user_order_id');
+		$date = date('Y-m-d');
 		if ($cekpaket == 'paket') {
-			$ic = $this->session->userdata('id');$it = $this->session->userdata('id_table');$uoi = $this->session->userdata('user_order_id');
-			$date = date('Y-m-d');
 			$where ="id_customer ='".$ic."' and id_table ='".$nomeja."' and user_order_id ='".$uoi."' and left(entry_date,10) ='".$date."'";
 			$this->db->where($where);
 			$this->db->delete('sh_cart_details');
 			$this->db->where('id',$id);
 			$this->db->delete('sh_cart');
 		}else{
+			$query = $this->db->get_where('sh_cart', array('id' => $id))->row();
+			if ($query) {
+				$where ="id_customer ='".$ic."' and id_table ='".$nomeja."' and user_order_id ='".$uoi."' and left(entry_date,10) ='".$date."' and item_code_header = '".$query->item_code."'";
+				$this->db->where($where);
+				$this->db->delete('sh_cart');
+			}
 			$this->db->where('id',$id);
 			$this->db->delete('sh_cart');
 		}
@@ -724,6 +730,7 @@ function __construct()
 		}
 		redirect(base_url().$log);
 	}
+	
 	public function cancel_order($nomeja,$cek,$sub,$add=NULL)
 	{
 		$ic = $this->session->userdata('id');

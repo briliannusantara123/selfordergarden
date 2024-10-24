@@ -92,6 +92,42 @@ class Ordermakanan extends CI_Controller {
 			$this->load->view('ordermakanan',$data);
 		
 	}
+	public function menutest($tipe,$sub_category)
+	{
+		$this->session->unset_userdata('notfound');
+		$id_customer = $this->session->userdata('id');
+		$nomeja = $this->session->userdata('nomeja');
+		$data['item'] = $this->Item_model->getData($tipe,$sub_category);
+		$data['sub'] = $this->Item_model->sub_category();
+		$data['sube'] = $this->Item_model->sub_category_event();		//$data['option'] = $this->Item_model->option();
+		$data['s'] = $sub_category;
+		$data['ic'] = $id_customer;
+		
+		$data['key'] = '';
+		$data['cart_count'] = $this->Item_model->hitungcart($nomeja);
+		$data['nomeja'] = $this->session->userdata('nomeja');
+		$cart_count = $this->Item_model->cart_count($id_customer,$nomeja)->num_rows();
+		if($cart_count > 0){
+			$cart = $this->Item_model->cart_count($id_customer,$nomeja)->row();//tambahan	
+			$cart_total = $cart->total_qty;
+		}else{
+			$cart_total = 0;
+		}
+		$data['total_qty'] = $cart_total;
+		// $data['total_qty'] = $cart_total;
+		// $id_customer = $this->session->userdata('id');
+		// $q1 = "select * from sh_t_transactions where id_customer = '".$id_customer."' limit 1";
+		// 	$trans = $this->db->query($q1)->row();
+		// 	$notrans = $trans->id;
+		// $wh = "id_trans = '".$notrans."' and left(created_date,10) = left(sysdate(),10)";
+		// $co = $this->db
+  // 			->where($wh)
+  // 			->get('sh_t_transaction_details')
+  // 			->num_rows();
+  // 		$data['co'] = $co;
+			$this->load->view('ordermakanantest',$data);
+		
+	}
 	public function detailmenu($id,$sub)
 	{
 		$sharp = str_replace("%20","_", $sub);
@@ -413,10 +449,11 @@ class Ordermakanan extends CI_Controller {
         foreach ($options as $option) {
         	$op = htmlspecialchars($option);
         }
-        $addons = $_POST['addons']; // Ini juga akan menjadi array
-        foreach ($addons as $addon) {
-        	$ad = htmlspecialchars($addon);
-        }
+        $addons = $this->input->post('addons');
+        // $addons = $_POST['addons']; // Ini juga akan menjadi array
+        // foreach ($addons as $addon) {
+        // 	$ad = htmlspecialchars($addon);
+        // }
         $sharp = str_replace("%20","_", $sub);
 		$url = $sub.'#'.$sharp;
 		$id = $this->input->post('id');
@@ -477,26 +514,42 @@ class Ordermakanan extends CI_Controller {
 			  	$result = $this->db->insert('sh_cart',$data);
 			  }
 			  if ($result) {
-			  	$IA = $this->Item_model->GetItemADD($ad);
-		  		if ($IA) {
-		  			$dataADD = [
-						'item_code' => $IA->no,
-						'id_trans' => $id_trans->id,
-						'id_customer' => $this->session->userdata('id'),
-						'qty' => 1, 
-						'cabang' => $cabang,
-						'unit_price' => $this->input->post('unit_price_add'),
-						'description' => $IA->description,
-						'entry_by' => $this->session->userdata('username'),
-						'id_table' => $this->session->userdata('nomeja'),
-						'extra_notes' => '',
-						'entry_date' => date('Y-m-d'),
-						'user_order_id' => $this->session->userdata('user_order_id'),
-						'options' => '',
-						'addons' => 1,
-					];
-					$this->db->insert('sh_cart',$dataADD);
-		  		}
+			  	if (!empty($addons)) {
+				    foreach ($addons as $addon) {
+				        // Escape untuk keamanan
+				        $ad = htmlspecialchars($addon);
+
+				        // Ambil detail addon berdasarkan kode addon
+				        $IA = $this->Item_model->GetItemADD($ad);
+
+				        if ($IA) {
+				            // Dapatkan harga unit dari input, pastikan harga yang sesuai diambil
+				            $unit_price = $this->input->post('unit_price_add');
+				            
+				            // Siapkan data untuk dimasukkan ke dalam tabel 'sh_cart'
+				            $dataADD = [
+				                'item_code' => $IA->no,
+				                'item_code_header' => $this->input->post('no'),
+				                'id_trans' => $id_trans->id,
+				                'id_customer' => $this->session->userdata('id'),
+				                'qty' => 1,  // Jika ada kuantitas yang berbeda, bisa diubah sesuai kebutuhan
+				                'cabang' => $cabang,
+				                'unit_price' => $unit_price,  // Pastikan harga addon sudah sesuai
+				                'description' => $IA->description,
+				                'entry_by' => $this->session->userdata('username'),
+				                'id_table' => $this->session->userdata('nomeja'),
+				                'extra_notes' => '',  // Jika ada catatan tambahan, tambahkan di sini
+				                'entry_date' => date('Y-m-d'),
+				                'user_order_id' => $this->session->userdata('user_order_id'),
+				                'options' => '',  // Jika ada opsi khusus, tambahkan di sini
+				                'addons' => 1,  // Tandai bahwa ini adalah addon
+				            ];
+
+				            // Masukkan data ke tabel 'sh_cart'
+				            $this->db->insert('sh_cart', $dataADD);
+				        }
+				    }
+				}
 			  }
 			  $id_customer = $this->session->userdata('id');
 					$id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();
