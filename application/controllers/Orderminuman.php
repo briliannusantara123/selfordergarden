@@ -11,6 +11,7 @@ class Orderminuman extends CI_Controller {
   				redirect('login/logout/'.$nomeja);
         	}
 			$this->load->model('Item_model');
+			$this->load->model('Admin_model');
 			$this->load->model('cekstatus_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
@@ -75,6 +76,7 @@ class Orderminuman extends CI_Controller {
 			$cart_total = 0;
 		}
 		$data['total_qty'] = $cart_total;
+		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
 			$this->load->view('orderminuman',$data);
 		
 	}

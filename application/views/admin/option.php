@@ -83,8 +83,8 @@
 					                                        	<?php endif ?>
 					                                        </td>
 					                                        <td>
-					                                        	<a href=""><i class="fas fa-pen" style="color: orange;font-size: 20px;"></i></a>
-					                                        	<a href=""><i class="fas fa-trash" style="color: red;font-size: 20px;"></i></a>
+					                                        	<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModaleditoption<?= $d->id?>"><i class="fas fa-pen" style="color: orange;font-size: 20px;"></i></a>
+					                                        	<a href="<?= base_url() ?>index.php/Admin/delete/<?= $d->id ?>"><i class="fas fa-trash" style="color: red;font-size: 20px;"></i></a>
 					                                        </td>
 					                                    </tr>
 				                                	<?php endforeach ?>
@@ -133,8 +133,8 @@
 					                                        	<?php endif ?>
 					                                        </td>
 					                                        <td>
-					                                        	<a href=""><i class="fas fa-pen" style="color: orange;font-size: 20px;"></i></a>
-					                                        	<a href=""><i class="fas fa-trash" style="color: red;font-size: 20px;"></i></a>
+					                                        	<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModaleditaddon<?= $d->id?>"><i class="fas fa-pen" style="color: orange;font-size: 20px;"></i></a>
+					                                        	<a href="<?= base_url() ?>index.php/Admin/delete/<?= $d->id ?>"><i class="fas fa-trash" style="color: red;font-size: 20px;"></i></a>
 					                                        </td>
 					                                    </tr>
 				                                	<?php endforeach ?>
@@ -160,7 +160,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<form>
+      	<form action="<?= base_url('index.php/admin/create_option') ?>" method="POST">
 	        <div class="mb-3">
 			  <label for="formFile" class="form-label">Item Name</label>
 			  <select class="form-control" name="no">
@@ -171,7 +171,7 @@
 			</div>
 			<div class="mb-3">
 			  <label for="formFile" class="form-label">Option</label>
-			  <input class="form-control" type="text" name="option">
+			  <input class="form-control" type="text" name="option" required="">
 			</div>
 			<div class="mb-3">
 			  <label for="formFile" class="form-label">Status</label>
@@ -190,6 +190,49 @@
   </div>
 </div>
 
+<?php foreach ($option as $o): ?>
+	<div class="modal fade" id="exampleModaleditoption<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Option</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- Form untuk melakukan edit, actionnya diarahkan ke fungsi update -->
+					<form action="<?= base_url('index.php/admin/update/<?= $o->id ?>') ?>" method="POST">
+						<input type="hidden" name="id" value="<?= $o->id ?>">
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Item Name</label>
+							<select class="form-control" name="no">
+								<?php foreach ($item as $i): ?>
+									<option value="<?= $i->no ?>" <?= $o->item_code == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
+								<?php endforeach ?>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Option</label>
+							<input class="form-control" type="text" name="option" value="<?= $o->description ?>" required="">
+						</div>
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Status</label>
+							<select class="form-control" name="is_active">
+								<option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
+								<option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
+							</select>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn" style="background-color: #198754; color: white;">Submit</button>
+				</div>
+					</form>
+			</div>
+		</div>
+	</div>
+<?php endforeach ?>
+
+
 <div class="modal fade" id="exampleModaladdon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -198,7 +241,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<form>
+      	<form action="<?= base_url('index.php/admin/create_addon') ?>" method="POST">
 	        <div class="mb-3">
 			  <label for="formFile" class="form-label">Item Name</label>
 			  <select class="form-control" name="no">
@@ -231,6 +274,52 @@
     </div>
   </div>
 </div>
+
+<?php foreach ($addon as $o): ?>
+	<div class="modal fade" id="exampleModaleditaddon<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Addon</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- Form untuk melakukan edit, actionnya diarahkan ke fungsi update -->
+					<form action="<?= base_url('index.php/admin/update/<?= $o->id ?>') ?>" method="POST">
+						<input type="hidden" name="id" value="<?= $o->id ?>">
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Item Name</label>
+							<select class="form-control" name="no">
+								<?php foreach ($item as $i): ?>
+									<option value="<?= $i->no ?>" <?= $o->item_code == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
+								<?php endforeach ?>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Add On</label>
+							  <select class="form-control" name="option">
+							  	<?php foreach ($item as $i): ?>
+							  		<option value="<?= $i->no ?>" <?= $o->description == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
+							  	<?php endforeach ?>
+							  </select>
+						</div>
+						<div class="mb-3">
+							<label for="formFile" class="form-label">Status</label>
+							<select class="form-control" name="is_active">
+								<option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
+								<option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
+							</select>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn" style="background-color: #198754; color: white;">Submit</button>
+				</div>
+					</form>
+			</div>
+		</div>
+	</div>
+<?php endforeach ?>
 
    
  <?php $this->load->view('admin/layout/footer') ?>

@@ -9,6 +9,7 @@ public function __construct() {
   				redirect('login/logout/'.$nomeja);
         	}
 			$this->load->model('Item_model');
+			$this->load->model('Admin_model');
 			$this->load->model('cekstatus_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
@@ -52,6 +53,8 @@ public function __construct() {
 			$cart_total = 0;
 		}
 		$data['total_qty'] = $cart_total;
+		$data['icon'] = $this->Admin_model->getIcon('home');
+		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
 		// var_dump($test);exit();
 		$this->load->view('self_index',$data);
 	}

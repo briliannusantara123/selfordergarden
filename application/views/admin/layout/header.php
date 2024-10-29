@@ -48,14 +48,14 @@
                     <div class="main-menu-header">
                         <img class="img-radius" src="<?= base_url('assets/userkosong.png'); ?>" alt="User-Profile-Image">
                         <div class="user-details">
-                            <div id="more-details">Admin Selforder <i class="fa fa-caret-down"></i></div>
+                            <div id="more-details"><?= $this->session->userdata('username') ?><i class="fa fa-caret-down"></i></div>
                         </div>
                     </div>
                     <div class="collapse" id="nav-user-link">
                         <ul class="list-unstyled">
                             <li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
                             <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
-                            <li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+                            <li class="list-group-item"><a href="<?= base_url() ?>index.php/login/logoutadmin"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                         <a href="<?= base_url('index.php/Admin/icon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Icon</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="map-google.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Color</span></a>
+                        <a href="<?= base_url('index.php/Admin/color') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Color</span></a>
                     </li>
                     <!-- <li class="nav-item pcoded-menu-caption">
                         <label>Pages</label>
@@ -184,9 +184,9 @@
                                         </li>
                                         <li class="notification">
                                             <div class="media">
-                                                <img class="img-radius" src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="Generic placeholder image">
+                                                <img class="img-radius" src="<?= base_url('assets/userkosong.png'); ?>" alt="Generic placeholder image">
                                                 <div class="media-body">
-                                                    <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+                                                    <p><strong><?= $this->session->userdata('username') ?></strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
                                                     <p>New ticket Added</p>
                                                 </div>
                                             </div>
@@ -205,7 +205,7 @@
                                         </li>
                                         <li class="notification">
                                             <div class="media">
-                                                <img class="img-radius" src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="Generic placeholder image">
+                                                <img class="img-radius" src="<?= base_url('assets/userkosong.png'); ?>" alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
                                                     <p>currently login</p>
@@ -235,16 +235,16 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-notification">
                                     <div class="pro-head">
-                                        <img src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" class="img-radius" alt="User-Profile-Image">
-                                        <span>John Doe</span>
-                                        <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                        <img src="<?= base_url('assets/userkosong.png'); ?>" class="img-radius" alt="User-Profile-Image">
+                                        <span><?= $this->session->userdata('username') ?></span>
+                                        <a href="<?= base_url() ?>index.php/login/logoutadmin" class="dud-logout" title="Logout">
                                             <i class="feather icon-log-out"></i>
                                         </a>
                                     </div>
                                     <ul class="pro-body">
                                         <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
                                         <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                                        <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+                                        <!-- <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
                                     </ul>
                                 </div>
                             </div>

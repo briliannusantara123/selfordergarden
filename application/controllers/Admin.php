@@ -85,10 +85,143 @@ function __construct()
 	    $this->load->view('admin/option', $data);
 	}
 
+	public function create_option()
+	{
+		$data = [
+			'item_code' => $this->input->post('no'),
+			'description' => $this->input->post('option'),
+			'is_active' => $this->input->post('is_active'),
+			'option' => 1,
+			'type' => 'option',
+		];
+		$this->db->insert('sh_m_item_option',$data);
+		$this->session->set_flashdata('success','Data option has been successfully saved');
+		redirect('Admin/option/');
+	}
+
+	public function create_addon()
+	{
+		$data = [
+			'item_code' => $this->input->post('no'),
+			'description' => $this->input->post('addon'),
+			'is_active' => $this->input->post('is_active'),
+			'option' => 1,
+			'type' => 'addon',
+		];
+		$this->db->insert('sh_m_item_option',$data);
+		$this->session->set_flashdata('success','Data add on has been successfully saved');
+		redirect('Admin/option/');
+	}
+	public function update($id)
+	{
+		$id = $this->input->post('id'); // Pastikan id dikirim dari form
+
+		$data = [
+			'item_code' => $this->input->post('no'),
+			'description' => $this->input->post('option'),
+			'is_active' => $this->input->post('is_active'),
+		];
+
+		$this->db->where('id', $id);
+		$this->db->update('sh_m_item_option', $data);
+
+		// Set flashdata untuk menampilkan pesan sukses
+		$this->session->set_flashdata('success', 'Data option has been successfully updated');
+
+		// Redirect ke halaman option
+		redirect('Admin/option/');
+
+	}
+	public function delete($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('sh_m_item_option');
+		$this->session->set_flashdata('success','Data add on has been successfully deleted');
+		redirect('Admin/option/');
+	}
+
 	public function icon()
 	{
-		$this->load->view('admin/icon');
+		$data = [
+			'home' => $this->Admin_model->getIcon('home'),
+			'footer' => $this->Admin_model->getIcon('footer'),
+		];
+		$this->load->view('admin/icon',$data);
 	}
+	public function create_icon($type)
+	{
+		$upload_path = 'C:/xampp7/htdocs/selfordergarden/assets/icon/menu/'; // Ensure this path is correct and writable
+
+	    // Prepare the data array
+	    $data = [
+	    	'type' => $type,
+	        'title' => $this->input->post('title'),
+	        // 'link' => $this->input->post('link'),
+	        'is_active' => $this->input->post('is_active'),
+	    ];
+
+	    // Check if a file is uploaded
+	    if (isset($_FILES['icon']) && $_FILES['icon']['error'] == UPLOAD_ERR_OK) {
+	        $file_name = $_FILES['icon']['name'];
+	        $file_tmp = $_FILES['icon']['tmp_name'];
+	        $file_name = date('Ymd') . '_' . basename($file_name);
+
+	        // Attempt to move the uploaded file
+	        if (move_uploaded_file($file_tmp, $upload_path . $file_name)) {
+	            // If successful, update the image_path in the data array
+	            $data['image_path'] = base_url('assets/icon/menu/' . $file_name); // Save the relative URL
+	        } else {
+	            $this->session->set_flashdata('error', 'Failed to move uploaded file.');
+	            redirect('Admin/icon/');
+	            return; // Stop execution if the file move failed
+	        }
+	    }
+		$this->db->insert('sh_m_setup_so',$data);
+		$this->session->set_flashdata('success','Data icon home has been successfully saved');
+		redirect('Admin/icon/');
+	}
+	public function update_icon($id)
+	{
+	    $upload_path = 'C:/xampp7/htdocs/selfordergarden/assets/icon/menu/'; // Ensure this path is correct and writable
+
+	    // Prepare the data array
+	    $data = [
+	        'title' => $this->input->post('title'),
+	        // 'link' => $this->input->post('link'),
+	        'is_active' => $this->input->post('is_active'),
+	    ];
+
+	    // Check if a file is uploaded
+	    if (isset($_FILES['icon']) && $_FILES['icon']['error'] == UPLOAD_ERR_OK) {
+	        $file_name = $_FILES['icon']['name'];
+	        $file_tmp = $_FILES['icon']['tmp_name'];
+	        $file_name = date('Ymd') . '_' . basename($file_name);
+
+	        // Attempt to move the uploaded file
+	        if (move_uploaded_file($file_tmp, $upload_path . $file_name)) {
+	            // If successful, update the image_path in the data array
+	            $data['image_path'] = base_url('assets/icon/menu/' . $file_name); // Save the relative URL
+	        } else {
+	            $this->session->set_flashdata('error', 'Failed to move uploaded file.');
+	            redirect('Admin/icon/');
+	            return; // Stop execution if the file move failed
+	        }
+	    }
+
+	    // Update the database record
+	    $this->db->where('id', $id);
+	    $this->db->update('sh_m_setup_so', $data);
+
+	    // Set a success message
+	    $this->session->set_flashdata('success', 'Icon data has been successfully updated.');
+	    redirect('Admin/icon/');
+	}
+	public function color()
+	{
+		$this->load->view('admin/color');
+	}
+
+
 	
 	
 }

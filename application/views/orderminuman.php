@@ -125,8 +125,8 @@
 </div>
 <div style="margin-bottom: 50px"></div>
 
-        <div class="containerfooter text-center" >
-    <footer>
+<div class="containerfooter text-center" >
+    <!-- <footer>
         <nav>
             <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>">
                 <i class="fas fa-home" style="color: grey"></i>
@@ -151,6 +151,43 @@
                 <span>Profile</span>
             </a>
         </nav>
+    </footer> -->
+    <footer>
+            <nav>
+                <!-- <a href="" class="cart-link" style="position: relative;">
+                    <i class="fas fa-home" style="color: white; background-color: #198754; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
+                    </i>
+                    <span style="position: relative; top: 12px;font-size: 17px;color: #198754;">Home</span>
+                </a> -->
+                <?php foreach ($iconfooter as $i): ?>
+                    <a href="<?= base_url() ?><?= $i->link ?><?= $nomeja ?>/Minuman/<?= $s ?>">
+                        <img src="<?= $i->image_path ?>" style="width: 25px;height: 25px; filter: grayscale(100%);">
+                    <?php if ($i->title == 'Cart'): ?>
+                       <span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span>
+                    <?php endif ?>
+                    </i>
+
+                        <span><?= $i->title ?></span>
+                    </a>
+                <?php endforeach ?>
+                <!-- <a href="<?= base_url() ?>index.php/Cart/home/<?= $nomeja ?>/Home/">
+                    <i class="fas fa-shopping-cart" ><span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span></i>
+
+                    <span>Cart</span>
+                </a> -->
+                <!-- <a href="<?= base_url() ?>index.php/Kasir_waitress/memanggil/<?= $nomeja ?>">
+                    <img src="<?= base_url(); ?>/assets/icon/menu/call_waitress.png" 
+                     style="width: 35px; height: 35px; border-radius: 50%; filter: grayscale(100%);" 
+                     alt="Hachi Grill" class="image" />
+
+                    <span style="margin-top: -1px;">Call Waitress</span>
+                </a>
+                <a href="<?= base_url() ?>index.php/user/home/home/<?= $nomeja ?>">
+                    <i class="fas fa-user" ></i>
+
+                    <span>Profile</span>
+                </a> -->
+            </nav>
     </footer>
 </div>
 

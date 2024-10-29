@@ -991,6 +991,7 @@ public function get_info_item($item_code, $data)
 		    $query = $this->db->get()->result();
 		    return $query; 
 		}
+		
 		// public function get_qty()
 		// {
 		// 	$ic = $this->session->userdata('id');

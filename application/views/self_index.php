@@ -263,30 +263,37 @@
     </div>
     <div class="main"></div>
     <div class="main-content">
-        <div class="row">
-            <div class="col-6">
-                <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
-                    <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;">Order Food</span>
-                </a>
-            </div>
+            <div class="row">
+                <?php foreach ($icon as $i): ?>
+                <div class="col-6">
+                    <a 
+                    <?php if ($i->link_type == 'makanan'): ?>
+                        href="<?=  base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>"
+                    <?php elseif ($i->link_type == 'minuman'): ?>
+                        href="<?=  base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>"
+                    <?php else: ?>
+                        href="<?=  base_url() ?><?= $i->link ?><?= $nomeja ?>"
+                    <?php endif ?>
+                    
 
-            <div class="col-6">
-                <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
-                    <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                    <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;">Order Beverage</span>
-                </a>
+                     class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="<?= $i->image_path ?>" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
+                        <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;"><?= $i->title ?></span>
+                    </a>
+                </div>
+                <?php endforeach ?>
             </div>
-        </div>
-        <div class="row">
+        
+        
+        <!-- <div class="row">
             <div class="col-6">
-                <a href="<?php echo base_url() ?>index.php/Kasir_waitress/memanggil/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
+                <a href="<?= base_url() ?>index.php/Kasir_waitress/memanggil/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/call_waitress.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
                     <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Call Waitress</strong></span>
                 </a>
             </div>
             <div class="col-6">
-                <a href="<?php echo base_url() ?>index.php/Kasir_waitress/meminta/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
+                <a href="<?= base_url() ?>index.php/Kasir_waitress/meminta/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/memintabill.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
                     <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Request Bill</strong></span>
                 </a>
@@ -294,7 +301,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <a href="<?php echo base_url() ?>index.php/Review/form/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
+                <a href="<?= base_url() ?>index.php/Review/form/<?= $no_meja ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
                     <img src="<?= base_url();?>/assets/icon/menu/note.png" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
                     <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Feedback and Suggestions</strong></span>
                 </a>
@@ -305,38 +312,49 @@
                     <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;"><strong>Bill Preview</strong></span>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div style="margin-bottom: 150px;"></div>
     </div>
     
     
 
     <div class="containerfooter text-center" >
-    <footer>
-        <nav>
-            <a href="" class="cart-link" style="position: relative;">
-                <i class="fas fa-home" style="color: white; background-color: #198754; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
-                </i>
-                <span style="position: relative; top: 12px;font-size: 17px;color: #198754;">Home</span>
-            </a>
-            <a href="<?= base_url() ?>index.php/Cart/home/<?= $nomeja ?>/Home/">
-                <i class="fas fa-shopping-cart" ><span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span></i>
+        <footer>
+            <nav>
+                <!-- <a href="" class="cart-link" style="position: relative;">
+                    <i class="fas fa-home" style="color: white; background-color: #198754; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
+                    </i>
+                    <span style="position: relative; top: 12px;font-size: 17px;color: #198754;">Home</span>
+                </a> -->
+                <?php foreach ($iconfooter as $i): ?>
+                    <a href="<?= base_url() ?><?= $i->link ?><?= $nomeja ?>/Home/">
+                        <img src="<?= $i->image_path ?>" style="width: 25px;height: 25px; filter: grayscale(100%);">
+                    <?php if ($i->title == 'Cart'): ?>
+                       <span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span>
+                    <?php endif ?>
+                    </i>
 
-                <span>Cart</span>
-            </a>
-            <a href="<?= base_url() ?>index.php/Kasir_waitress/memanggil/<?= $nomeja ?>">
-                <img src="<?= base_url(); ?>/assets/icon/menu/call_waitress.png" 
-                 style="width: 35px; height: 35px; border-radius: 50%; filter: grayscale(100%);" 
-                 alt="Hachi Grill" class="image" />
+                        <span><?= $i->title ?></span>
+                    </a>
+                <?php endforeach ?>
+                <!-- <a href="<?= base_url() ?>index.php/Cart/home/<?= $nomeja ?>/Home/">
+                    <i class="fas fa-shopping-cart" ><span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span></i>
 
-                <span style="margin-top: -1px;">Call Waitress</span>
-            </a>
-            <a href="<?= base_url() ?>index.php/user/home/home/<?= $nomeja ?>">
-                <i class="fas fa-user" ></i>
+                    <span>Cart</span>
+                </a> -->
+                <!-- <a href="<?= base_url() ?>index.php/Kasir_waitress/memanggil/<?= $nomeja ?>">
+                    <img src="<?= base_url(); ?>/assets/icon/menu/call_waitress.png" 
+                     style="width: 35px; height: 35px; border-radius: 50%; filter: grayscale(100%);" 
+                     alt="Hachi Grill" class="image" />
 
-                <span>Profile</span>
-            </a>
-        </nav>
-    </footer>
-</div>
+                    <span style="margin-top: -1px;">Call Waitress</span>
+                </a>
+                <a href="<?= base_url() ?>index.php/user/home/home/<?= $nomeja ?>">
+                    <i class="fas fa-user" ></i>
+
+                    <span>Profile</span>
+                </a> -->
+            </nav>
+        </footer>
+    </div>
 <?php $this->load->view('template/footer') ?>

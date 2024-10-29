@@ -11,6 +11,7 @@ class Billsementara extends CI_Controller {
   				redirect('login/logout/'.$nomeja);
         	}
 			$this->load->model('Item_model');
+			$this->load->model('Admin_model');
 			$this->load->model('cekstatus_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
@@ -66,6 +67,7 @@ class Billsementara extends CI_Controller {
 		$data['notrans'] = $notrans;
 		$data['order_bill'] = $this->Item_model->order_bill($cabang,$notrans);
 		$data['order_bill_line'] = $this->Item_model->order_bill_line($cabang,$notrans);
+		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
 		$this->load->view('billsementara',$data);
 	}
 }

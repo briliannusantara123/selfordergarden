@@ -51,6 +51,16 @@ class Admin_model extends CI_model {
         $query = $this->db->get();
         return $query->result();
 	}
+	public function getIcon($type)
+		{
+		    $this->db->select('d.*');
+		    $this->db->from('sh_m_setup_so d');
+		    $this->db->where('d.type', $type);
+		    $this->db->where('d.is_active', 1);
+		    
+		    $query = $this->db->get()->result();
+		    return $query; 
+		}
 
 		
 	public function save($data, $where='') {

@@ -11,6 +11,7 @@ class Ordermakanan extends CI_Controller {
   				redirect('login/logout/'.$nomeja);
         	}
 			$this->load->model('Item_model');
+			$this->load->model('Admin_model');
 			$this->load->model('cekstatus_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
@@ -78,6 +79,7 @@ class Ordermakanan extends CI_Controller {
 			$cart_total = 0;
 		}
 		$data['total_qty'] = $cart_total;
+		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
 		// $data['total_qty'] = $cart_total;
 		// $id_customer = $this->session->userdata('id');
 		// $q1 = "select * from sh_t_transactions where id_customer = '".$id_customer."' limit 1";
