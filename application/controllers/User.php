@@ -11,6 +11,7 @@ function __construct()
         	}
 			$this->load->model('Item_model');
 			$this->load->model('cekstatus_model');
+			$this->load->model('Admin_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
 
@@ -63,6 +64,8 @@ function __construct()
 			'nomeja' => $nomeja,
 			'total_qty' => $cart_total,
 			'url' => $urls,
+			'color' => $this->Admin_model->getColor(),
+			'iconfooter' => $this->Admin_model->getIcon('footer'),
 		];
 		
 		$this->load->view('user',$data);

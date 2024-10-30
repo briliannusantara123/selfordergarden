@@ -80,6 +80,7 @@ class Ordermakanan extends CI_Controller {
 		}
 		$data['total_qty'] = $cart_total;
 		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
+		$data['color'] = $this->Admin_model->getColor();
 		// $data['total_qty'] = $cart_total;
 		// $id_customer = $this->session->userdata('id');
 		// $q1 = "select * from sh_t_transactions where id_customer = '".$id_customer."' limit 1";
@@ -148,6 +149,7 @@ class Ordermakanan extends CI_Controller {
 			'nomeja' => $nomeja,
 			'link' => $link,
 			'linkform' => $linkform,
+			'color' => $this->Admin_model->getColor(),
 		];
 		$this->load->view('detailmenu',$data);
 	}

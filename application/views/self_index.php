@@ -11,7 +11,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(to right, #00B050, #198754, #0b452a);
+        background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);
         padding: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 4;
@@ -35,7 +35,7 @@
         left: 0;
         width: 100vw;
         height: 150px;
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         padding-left: 20px;
         z-index: 3; /* Z-index lebih tinggi untuk menampilkan di atas bulat */
     }
@@ -64,7 +64,7 @@
         left: 0;
         width: 100vw;
         height: 130px;
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -102,6 +102,10 @@
         color: grey;
     }
 
+    .main-content .btn:hover {
+        background-color: <?= $color->color ?>;
+        color: white;
+    }
 
 
     .cart-link {
@@ -113,7 +117,7 @@
         top: -30px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         color: white;
         border-radius: 50%;
         padding: 17px;
@@ -144,7 +148,7 @@
         }
     }
     .bulat {
-        background-color: rgba(11, 222, 124, 0.3);
+        background-color: <?= $color->lightcolor ?>;
         width: 360px;
         height: 200px;
         border-radius: 50%;
@@ -276,7 +280,7 @@
                     <?php endif ?>
                     
 
-                     class="btn btn-success" style="display: flex; flex-direction: column; align-items: center;">
+                     class="btn" style="display: flex; flex-direction: column; align-items: center;">
                         <img src="<?= $i->image_path ?>" style="width: 110px; height: 125px; border-radius: 50%;" alt="Hachi Grill" class="image" />
                         <span style="margin-top: 5px;margin-bottom: 10px;font-size: 15px;font-weight: bold;"><?= $i->title ?></span>
                     </a>
@@ -322,9 +326,9 @@
         <footer>
             <nav>
                 <!-- <a href="" class="cart-link" style="position: relative;">
-                    <i class="fas fa-home" style="color: white; background-color: #198754; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
+                    <i class="fas fa-home" style="color: white; background-color: <?= $color->color ?>; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
                     </i>
-                    <span style="position: relative; top: 12px;font-size: 17px;color: #198754;">Home</span>
+                    <span style="position: relative; top: 12px;font-size: 17px;color: <?= $color->color ?>;">Home</span>
                 </a> -->
                 <?php foreach ($iconfooter as $i): ?>
                     <a href="<?= base_url() ?><?= $i->link ?><?= $nomeja ?>/Home/">

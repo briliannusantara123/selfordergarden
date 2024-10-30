@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="margin-left: 20px;"> 
-                            <h3><strong>Icons can be downloaded from <a href="https://www.flaticon.com/" target="_blank">Flaticon</a>, <a href="https://www.freepik.com/" target="_blank">Freepik</a>, and <a href="https://icons8.com/" target="_blank">Icons8</a>.</strong></h3>
+                            <!-- <h3><strong>Icons can be downloaded from <a href="https://www.flaticon.com/" target="_blank">Flaticon</a>, <a href="https://www.freepik.com/" target="_blank">Freepik</a>, and <a href="https://icons8.com/" target="_blank">Icons8</a>.</strong></h3> -->
                         </div>  
                         <div class="card-header-right">
                             <div class="btn-group card-option">
@@ -50,7 +50,7 @@
                                     			<h4>Icon Home</h4>
                                     		</div>
                                     		<div class="col-12">
-                                    			<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalhome" class="btn btn-success" style="background-color: #198754;border-radius: 20px;color: white;">Add Icon Home</a>
+                                    			<!-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalhome" class="btn btn-success" style="background-color: #198754;border-radius: 20px;color: white;">Add Icon Home</a> -->
                                     		</div>
                                     	</div>
                             
@@ -62,7 +62,7 @@
                                                     <tr>
                                                         <th><h5>#</h5></th>
                                                         <th><h5>Icon</h5></th>
-                                                        <th><h5>Type</h5></th>
+                                                        <!-- <th><h5>Type</h5></th> -->
                                                         <th><h5>Title</h5></th>
                                                         <th><h5>Status</h5></th>
                                                         <th><h5>Action</h5></th>
@@ -75,7 +75,7 @@
                                                         <tr>
                                                             <td><h5><?= $no++ ?></h5></td>
                                                             <td><img src="<?= $d->image_path ?>" style="width: 110px; height: 110px; border-radius: 50%;"></td>
-                                                            <td><h5><?= $d->type ?></h5></td>
+                                                            <!-- <td><h5><?= $d->type ?></h5></td> -->
                                                             <td><h5><?= $d->title ?></h5></td>
                                                             <td>
                                                                 <?php if ($d->is_active == 1): ?>
@@ -102,7 +102,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h4>Icon Footer</h4>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalfooter" class="btn btn-success" style="background-color: #198754;border-radius: 20px;color: white;">Add Icon Footer</a>
+                                        <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalfooter" class="btn btn-success" style="background-color: #198754;border-radius: 20px;color: white;">Add Icon Footer</a> -->
                                     </div>
                                     <div class="card-body table-border-style">
                                         <div class="table-responsive">
@@ -111,7 +111,7 @@
                                                     <tr>
                                                         <th><h5>#</h5></th>
                                                         <th><h5>Icon</h5></th>
-                                                        <th><h5>Type</h5></th>
+                                                        <!-- <th><h5>Type</h5></th> -->
                                                         <th><h5>Title</h5></th>
                                                         <th><h5>Status</h5></th>
                                                         <th><h5>Action</h5></th>
@@ -124,7 +124,7 @@
                                                         <tr>
                                                             <td><h5><?= $no++ ?></h5></td>
                                                             <td><img src="<?= $d->image_path ?>" style="width: 110px; height: 110px; border-radius: 50%;"></td>
-                                                            <td><h5><?= $d->type ?></h5></td>
+                                                            <!-- <td><h5><?= $d->type ?></h5></td> -->
                                                             <td><h5><?= $d->title ?></h5></td>
                                                             <td>
                                                                 <?php if ($d->is_active == 1): ?>
@@ -153,7 +153,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalhome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModalhome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -166,10 +166,10 @@
               <label for="formFile" class="form-label">Title</label>
               <input type="text" name="title" class="form-control">
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
               <label for="formFile" class="form-label">Link</label>
               <input type="text" name="link" class="form-control">
-            </div> -->
+            </div>
             <div class="mb-3">
               <label for="formFile" class="form-label">Icon Path</label>
               <input type="file" name="icon" class="form-control" required="">
@@ -190,7 +190,7 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
 <?php foreach ($home as $o): ?>
     <div class="modal fade" id="exampleModaledithome<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -237,7 +237,7 @@
 <?php endforeach ?>
 
 
-<div class="modal fade" id="exampleModalfooter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModalfooter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -250,10 +250,10 @@
               <label for="formFile" class="form-label">Title</label>
               <input type="text" name="title" class="form-control">
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
               <label for="formFile" class="form-label">Link</label>
               <input type="text" name="link" class="form-control">
-            </div> -->
+            </div>
             <div class="mb-3">
               <label for="formFile" class="form-label">Icon Path</label>
               <input type="file" name="icon" class="form-control" required="">
@@ -274,7 +274,7 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
 <?php foreach ($footer as $o): ?>
     <div class="modal fade" id="exampleModaleditfooter<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

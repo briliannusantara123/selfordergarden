@@ -3,10 +3,10 @@
 if(isset($_SERVER['HTTP_REFERER'])) {
     $previous = $_SERVER['HTTP_REFERER'];
 } ?>
-<div class="head" style="margin-bottom: 200px;">
+<div class="head" style="margin-bottom: 200px;background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);color: white;">
     <header>
         <div style="display: flex; align-items: center;">
-            <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>" style="text-decoration: none; color: black;">
+            <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>" style="text-decoration: none; color: white;">
                 <i class="bi bi-arrow-left" style="font-size: 30px;margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
             </a>
             <h2 style="margin: 0; margin-left: 5px;"><strong>Feedback and Suggestions</strong></h2>
@@ -36,7 +36,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
   </div>
   <footer>
     <div class="containerfooter" style="padding: 10px;">
-        <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Send</strong></button>
+        <button type="submit" class="btn add-btn" style="padding: 15px;font-size: 17px;background-color: <?= $color->color ?>;color: white;"><strong>Send</strong></button>
     </div>
   </footer>
 

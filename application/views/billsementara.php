@@ -11,7 +11,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(to right, #00B050, #198754, #0b452a);
+        background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);
         padding: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 4;
@@ -34,7 +34,7 @@
         left: 0;
         width: 100vw;
         height: 144px;
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         padding-left: 20px;
         z-index: 3; /* Z-index lebih tinggi untuk menampilkan di atas bulat */
     }
@@ -59,11 +59,11 @@
 
     .main {
         position: fixed;
-        top: 190px;
+        top: 178px;
         left: 0;
         width: 100vw;
-        height: 160px;
-        background-color: #198754;
+        height: 180px;
+        background-color: <?= $color->color ?>;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -169,7 +169,7 @@
         top: -30px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         color: white;
         border-radius: 50%;
         padding: 17px;
@@ -199,7 +199,7 @@
         width: 70%;margin-top: 35px;
     }
     .bulat {
-        background-color: rgba(11, 222, 124, 0.3);
+        background-color: <?= $color->lightcolor ?>;
         width: 360px;
         height: 200px;
         border-radius: 50%;
@@ -371,6 +371,7 @@
         <div class="bulat"></div>
     </div>
     <div class="main">
+        <hr style="color: <?= $color->darkcolor ?>">
         <div class="row">
             <div class="col-8">
                 <h2>Table Number</h2>
@@ -484,20 +485,19 @@
         <div class="containerfooter">
             <div class="container addorder" style="display: none;">
                     <div class="row">
-                        <div class="col-6">
-                            <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
-                                <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                                <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold; color: white;">Food</span>
-                            </a>
-                        </div>
+                        <?php foreach ($icon as $i): ?>
+                            <div class="col-6">
+                                <?php if ($i->link_type == 'makanan'): ?>
+                                    <a href="<?= base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;background-color: <?= $color->color ?>">
+                                <?php else: ?>
+                                    <a href="<?= base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;background-color: <?= $color->color ?>">
+                                <?php endif ?>
+                                    <img src="<?= $i->image_path ?>" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
+                                    <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold; color: white;"><?= $i->title ?></span>
+                                </a>
+                            </div>
 
-                        <div class="col-6">
-                            <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
-                                <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-                                <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold; color: white;">Beverage</span>
-                            </a>
-                        </div>
-
+                        <?php endforeach ?>
                     </div>  
             </div>
             <nav>
@@ -515,7 +515,7 @@
                 <a href="#" class="btn-add" >
                     <i class="fas fa-plus-circle" >
                     </i>
-                    <span class="textmuncul" style="position: relative; top: 12px;font-size: 17px;color: #198754;display: none;">Add Order</span>
+                    <span class="textmuncul" style="position: relative; top: 12px;font-size: 17px;color: <?= $color->color ?>;display: none;">Add Order</span>
                     <span class="texttutup">Add Order</span>
                 </a>
             </nav>

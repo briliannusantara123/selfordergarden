@@ -1,15 +1,21 @@
 <?php $this->load->view('template/headmenu') ?>
 <style type="text/css">
   .desc {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
     text-align: center;
     color: white;
     padding: 5px;
     border-radius: 10px;
     font-size: 20px;
   }
+  input[type="checkbox"]:checked {
+        background-color: <?= $color->color ?>; /* warna hijau */
+        border-color: <?= $color->color ?>;
+    }
+
 </style>
-<link href="<?= base_url();?>assets/css/detail.css" rel="stylesheet">
+<!-- <link href="<?= base_url();?>assets/css/detail.css" rel="stylesheet"> -->
+<?php $this->load->view('style/detail') ?>
   <div class="head">
         <header>
             <div style="display: flex; align-items: center;">
@@ -98,7 +104,7 @@
       <p class="description"><?= $item->product_info ?></p>
       <?php if ($option): ?>
         <h5 class="mt-1"><?= $item->description ?> Options</h5>
-        <label style="margin-left: 5px;margin-bottom: 10px; color: #198754">Please select at least one Options</label>
+        <label style="margin-left: 5px;margin-bottom: 10px; color: <?= $color->color ?>">Please select at least one Options</label>
         <?php foreach($option as $o): ?>
           <div class="row">
             <div class="col-1">
@@ -175,12 +181,12 @@
   
   <footer>
     <div class="quantity-control">
-      <button type="button" class="btn btn-success" style="color: white;height: 40px;" id="kurang">-</button>
+      <button type="button" class="btn" style="color: white;height: 40px;background-color: <?= $color->color ?>" id="kurang">-</button>
       <span id="hasil">1</span>
       <input type="hidden" name="qty" id="qty" value="1">
-      <button type="button" class="btn btn-success" style="color: white;height: 40px;" id="tambah">+</button>
+      <button type="button" class="btn" style="color: white;height: 40px;background-color: <?= $color->color ?>" id="tambah">+</button>
     </div>
-    <button type="submit" class="btn add-to-cart-btn">Add to Cart</button>
+    <button type="submit" class="btn add-to-cart-btn" style="background-color: <?= $color->color ?>;color: white;">Add to Cart</button>
   </footer>
 </form>
   <!-- Bootstrap JS and dependencies -->
@@ -257,7 +263,7 @@
             title: 'Notification!',
             text: isi,
             icon: 'warning',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             })
         }

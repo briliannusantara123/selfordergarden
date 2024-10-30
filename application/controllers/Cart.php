@@ -10,6 +10,7 @@ function __construct()
   				redirect('login/logout/'.$nomeja);
         	}
 			$this->load->model('Item_model');
+			$this->load->model('Admin_model');
 			$this->load->model('cekstatus_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
@@ -104,6 +105,8 @@ function __construct()
 		$data['sub'] = $sub;
 		$data['url'] = $url;
 		$data['no'] = $no;
+		$data['color'] = $this->Admin_model->getColor();
+		$data['icon'] = $this->Admin_model->getIcon('add');
 		$this->load->view('cart',$data);
 	}
 	public function get_total() {

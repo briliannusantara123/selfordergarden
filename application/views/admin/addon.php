@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                        	<div class="col-md-12">
+                        	<!-- <div class="col-md-12">
 				                <div class="card">
 				                    <div class="card-header">
 				                    	<div class="row">
@@ -96,8 +96,8 @@
 				                        </div>
 				                    </div>
 				                </div>
-				            </div>
-				            <!-- <div class="col-md-12">
+				            </div> -->
+				            <div class="col-md-12">
 				                <div class="card">
 				                    <div class="card-header">
 				                        <h4>AddOn Data</h4>
@@ -143,7 +143,7 @@
 				                        </div>
 				                    </div>
 				                </div>
-				            </div> -->
+				            </div>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModaloption" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModaloption" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -188,9 +188,9 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
-<?php foreach ($option as $o): ?>
+<!-- <?php foreach ($option as $o): ?>
 	<div class="modal fade" id="exampleModaleditoption<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -199,7 +199,6 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<!-- Form untuk melakukan edit, actionnya diarahkan ke fungsi update -->
 					<form action="<?= base_url('index.php/admin/update/<?= $o->id ?>') ?>" method="POST">
 						<input type="hidden" name="id" value="<?= $o->id ?>">
 						<div class="mb-3">
@@ -233,7 +232,7 @@
 <?php endforeach ?> -->
 
 
-<!-- <div class="modal fade" id="exampleModaladdon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModaladdon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -273,9 +272,9 @@
       </form>
     </div>
   </div>
-</div> -->
+</div>
 
-<!-- <?php foreach ($addon as $o): ?>
+<?php foreach ($addon as $o): ?>
 	<div class="modal fade" id="exampleModaleditaddon<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">

@@ -137,7 +137,7 @@
                                         <i class="bi bi-trash" style="font-size: 35px"></i>
                                     </a>
                                 <?php endif ?> -->
-                                <button type="button" class="btn btn-success kurang-btn" style="color: white;height: 35px; display: none;">-</button>
+                                <button type="button" class="btn kurang-btn" style="color: white;height: 35px; display: none;background-color: <?= $color->color ?>">-</button>
                                 <a href="<?= base_url() ?>index.php/cart/delete/<?= $i->id ?>/<?= $nomeja ?>/nonpaket/<?= $cek ?>/<?= $sub ?>" class="remove-item" style="margin-top: 5px; display: none;">
                                     <i class="bi bi-trash" style="font-size: 35px"></i>
                                 </a>
@@ -155,7 +155,7 @@
                                 <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
                                 <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
                                 
-                                <button type="button" class="btn btn-success tambah-btn" style="color: white;height: 35px;">+</button>
+                                <button type="button" class="btn tambah-btn" style="color: white;height: 35px;background-color: <?= $color->color ?>">+</button>
                             </div>
 
                         </div>
@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="col-4 text-center">
                                             <div class="quantity-control d-flex align-items-center mt-2">
-                                                <button type="button" class="btn btn-success kurang-btn" style="color: white;height: 35px; display: none;">-</button>
+                                                <button type="button" class="btn kurang-btn" style="color: white;height: 35px; display: none;background-color: <?= $color->color ?>">-</button>
                                                 <a href="<?= base_url() ?>index.php/cart/delete/<?= $i->id ?>/<?= $nomeja ?>/nonpaket/<?= $cek ?>/<?= $sub ?>" class="remove-item" style="margin-top: 5px; display: none;">
                                                     <i class="bi bi-trash" style="font-size: 35px"></i>
                                                 </a>
@@ -185,7 +185,7 @@
                                                 <input type="hidden" name="no[]" id="item_code" value="<?= $i->item_code ?>" class="form-control item_code">
                                                 <input type="hidden" name="need_stock[]" id="need_stock" value="<?= $i->need_stock ?>" class="form-control need_stock">
                                                 
-                                                <button type="button" class="btn btn-success tambah-btn" style="color: white;height: 35px;">+</button>
+                                                <button type="button" class="btn tambah-btn" style="color: white;height: 35px;background-color: <?= $color->color ?>;">+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -295,36 +295,36 @@
         <?php else: ?>
             <div style="text-align: center; margin-top: 200px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" color="green" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" style="display: block; margin-left: auto; margin-right: auto;">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    
                 </svg>
                 <br>
-                <h5 style="text-align: center; color: #198754;">Your Cart is Still Empty <br> Let’s Order Now!</h5>
+                <h3 style="text-align: center; color: <?= $color->color ?>;">Your Cart is Still Empty <br> Let’s Order Now!</h3>
             </div>
 
         <?php endif ?>
         <footer>
             <div class="container addorder" style="display: none;">
                 <div class="row">
-                    <div class="col-6">
-    <a href="<?= base_url() ?>index.php/ordermakanan/menu/Makanan/<?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
-        <img src="<?= base_url();?>/assets/icon/menu/order_makanan.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-        <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;">Food</span>
-    </a>
-</div>
+                    <?php foreach ($icon as $i): ?>
+                            <div class="col-6">
+                                <?php if ($i->link_type == 'makanan'): ?>
+                                    <a href="<?= base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $sca->sub_category) ?>#<?= str_replace(" ","_", $sca->sub_category) ?>" class="btn" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;background-color: <?= $color->color ?>">
+                                <?php else: ?>
+                                    <a href="<?= base_url() ?><?= $i->link ?><?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;background-color: <?= $color->color ?>">
+                                <?php endif ?>
+                                    <img src="<?= $i->image_path ?>" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
+                                    <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold; color: white;"><?= $i->title ?></span>
+                                </a>
+                            </div>
 
-<div class="col-6">
-    <a href="<?= base_url() ?>index.php/orderminuman/menu/Minuman/<?= str_replace(" ","%20", $scm->sub_category) ?>#<?= str_replace(" ","_", $scm->sub_category) ?>" class="btn btn-success" style="display: flex; flex-direction: column; align-items: center; padding: 5px 10px;">
-        <img src="<?= base_url();?>/assets/icon/menu/order_minuman.png" style="width: 80px; height: 90px; border-radius: 50%;" alt="Hachi Grill" class="image" />
-        <span style="margin-top: 5px; margin-bottom: 5px; font-size: 16px; font-weight: bold;">Beverage</span>
-    </a>
-</div>
+                        <?php endforeach ?>
 
                 </div>  
             </div>
             <div class="containerfooter" style="padding: 10px;">
                 <button type="button" class="btn btn-warning add-btn" style="padding: 15px;font-size: 17px;color: white;"><i class="bi bi-plus-circle"></i> <strong>Add to Order</strong></button>
                 <?php if ($item): ?>
-                    <button type="submit" class="btn btn-success add-btn" style="padding: 15px;font-size: 17px;"><strong>Order Now</strong></button>
+                    <button type="submit" class="btn add-btn" style="padding: 15px;font-size: 17px;background-color: <?= $color->color ?>;color: white;"><strong>Order Now</strong></button>
                 <?php endif ?>
             </div>
         </footer>

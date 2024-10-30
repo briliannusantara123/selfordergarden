@@ -11,6 +11,7 @@ function __construct()
         	}
 			$this->load->model('Item_model');
 			$this->load->model('cekstatus_model');
+			$this->load->model('Admin_model');
 			$this->load->helper('cookie');
 			$session = $this->cekstatus_model->cek();
 
@@ -41,6 +42,7 @@ function __construct()
 		$data['sub_category'] = "ayam";
 		$data['sub_category_minuman'] = "Cold Drink";
 		$data['nomeja'] = $nomeja;
+		$data['color'] = $this->Admin_model->getColor();
 		
 		$this->load->view('ordersementara',$data);
 	}

@@ -55,6 +55,7 @@ public function __construct() {
 		$data['total_qty'] = $cart_total;
 		$data['icon'] = $this->Admin_model->getIcon('home');
 		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
+		$data['color'] = $this->Admin_model->getColor();
 		// var_dump($test);exit();
 		$this->load->view('self_index',$data);
 	}

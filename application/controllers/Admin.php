@@ -51,7 +51,12 @@ function __construct()
 	    $data['option'] = $this->Admin_model->get_option($config1['per_page'], $page1);
     	$data['links1'] = $this->pagination->create_links();
 
-    	$config2['base_url'] = base_url('index.php/Admin/option');
+    	$data['item'] = $this->Admin_model->get_item();
+	    $this->load->view('admin/option', $data);
+	}
+	public function addon()
+	{
+		$config2['base_url'] = base_url('index.php/Admin/option');
 	    $config2['total_rows'] = $this->Admin_model->countAddon(); 
 	    $config2['per_page'] = 10; 
 	    $config2['uri_segment'] = 3;
@@ -79,10 +84,10 @@ function __construct()
 
 	    $page2 = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-	    $data['addon'] = $this->Admin_model->get_addon($config2['per_page'], $page1);
+	    $data['addon'] = $this->Admin_model->get_addon($config2['per_page'], $page2);
     	$data['links2'] = $this->pagination->create_links();
     	$data['item'] = $this->Admin_model->get_item();
-	    $this->load->view('admin/option', $data);
+	    $this->load->view('admin/addon', $data);
 	}
 
 	public function create_option()
@@ -218,9 +223,68 @@ function __construct()
 	}
 	public function color()
 	{
-		$this->load->view('admin/color');
+		$data = [
+			'color' => $this->Admin_model->getColor(),
+		];
+		$this->load->view('admin/color',$data);
 	}
+	public function savecolor($id)
+	{
+		$this->load->helper('color_helper');
+		$color = $this->input->post('color');
+		$rgb = hex_to_rgb($color);
+		$rgb_value = $rgb['r'] . ',' . $rgb['g'] . ',' . $rgb['b'];
+		function lighten_hex($hex, $percent = 20) {
+	        $hex = str_replace('#', '', $hex); // Menghapus simbol # jika ada
 
+	        // Mengonversi HEX ke RGB
+	        $r = hexdec(substr($hex, 0, 2));
+	        $g = hexdec(substr($hex, 2, 2));
+	        $b = hexdec(substr($hex, 4, 2));
+
+	        // Meningkatkan kecerahan RGB
+	        $r = min(255, $r + ($r * $percent / 100));
+	        $g = min(255, $g + ($g * $percent / 100));
+	        $b = min(255, $b + ($b * $percent / 100));
+
+	        // Mengonversi kembali ke HEX
+	        $new_hex = sprintf("#%02x%02x%02x", $r, $g, $b);
+
+	        return $new_hex;
+	    }
+	    function dark_hex($hex, $percent = 20) {
+		    // Menghapus simbol # jika ada
+		    $hex = str_replace('#', '', $hex);
+
+		    // Mengonversi HEX ke RGB
+		    $r = hexdec(substr($hex, 0, 2));
+		    $g = hexdec(substr($hex, 2, 2));
+		    $b = hexdec(substr($hex, 4, 2));
+
+		    // Menghitung nilai yang lebih gelap
+		    $r = max(0, $r - ($r * $percent / 100));
+		    $g = max(0, $g - ($g * $percent / 100));
+		    $b = max(0, $b - ($b * $percent / 100));
+
+		    // Mengonversi kembali ke HEX
+		    $new_hex = sprintf("#%02x%02x%02x", $r, $g, $b);
+
+		    return $new_hex;
+		}
+		$lighterColor = lighten_hex($color, 30);
+		$darkColor = dark_hex($color, 30);
+		$data = [
+			'color' => $color,
+			'lightcolor' => $lighterColor,
+			'darkcolor' => $darkColor,
+			'rgb' => $rgb_value,
+		];
+		$this->db->where('id',$id);
+		$this->db->update('sh_m_setup_color_so',$data);
+		$this->session->set_flashdata('success','Successfully Changed the Self-Order Display Color');
+		redirect('Admin/color/');
+	}
+	
 
 	
 	

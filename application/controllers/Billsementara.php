@@ -68,6 +68,8 @@ class Billsementara extends CI_Controller {
 		$data['order_bill'] = $this->Item_model->order_bill($cabang,$notrans);
 		$data['order_bill_line'] = $this->Item_model->order_bill_line($cabang,$notrans);
 		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
+		$data['color'] = $this->Admin_model->getColor();
+		$data['icon'] = $this->Admin_model->getIcon('add');
 		$this->load->view('billsementara',$data);
 	}
 }

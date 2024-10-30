@@ -31,7 +31,7 @@
     }
 
     .profile-card {
-        background-color: #fff;
+        background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);
         border-radius: 20px;
         width: 350px;
         padding: 20px;
@@ -71,7 +71,7 @@
     }
 
     .section-title p {
-        color: grey;
+        color: white;
         margin: 5px 0 0 0;
         font-size: 16px;
         font-weight: bold;
@@ -131,12 +131,12 @@
 </style>
 </head>
 <body>
-    <header>
+    <header style="background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);">
         <div>
-            <a href="<?= base_url() ?><?= $url ?>" style="text-decoration: none; color: black;">
+            <a href="<?= base_url() ?><?= $url ?>" style="text-decoration: none; color: white;">
                 <i class="bi bi-arrow-left" style="font-size: 30px; margin-left: 10px; text-shadow: 1px 1px 2px black;"></i>
             </a>
-            <h2><strong>Profile</strong></h2>
+            <h2 style="color: white;"><strong>Profile</strong></h2>
         </div>
     </header>
 
@@ -144,24 +144,24 @@
         <div class="notification-dot"></div>
         <img src="<?= base_url();?>assets/userkosong.png" class="profile-img" alt="Profile Image" style="filter: grayscale(100%);">
         <div class="section-title">  
-            <p>CUSTOMER</p>
-            <h2>TABLE NO : <?= $nomeja ?></h2>
+            <p style="color: white;">CUSTOMER</p>
+            <h2 style="color: white;">TABLE NO : <?= $nomeja ?></h2>
         </div>
         <div style="margin-bottom: 40px;"></div>
         <div class="info-group">
-            <label>Name</label>
-            <span><?= $username ?></span>
+            <label style="color: white;">Name</label>
+            <span style="color: white;"><?= $username ?></span>
         </div>
         <div class="info-group">
-            <label>Phone Number</label>
-            <span><?= $no_hp ?></span>
+            <label style="color: white;">Phone Number</label>
+            <span style="color: white;"><?= $no_hp ?></span>
         </div>
     </div>
 
     <div class="containerfooter text-center" >
         <footer>
             <nav>
-                <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>">
+                <!-- <a href="<?= base_url() ?>index.php/selforder/home/<?= $nomeja ?>">
                     <i class="fas fa-home" ></i>
 
                     <span>Home</span>
@@ -182,7 +182,18 @@
                     <i class="fas fa-user" style="color: white; background-color: #198754; border-radius: 50%; padding: 17px; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); z-index: 10;">
                     </i>
                     <span style="position: relative; top: 12px;font-size: 17px;color: #198754;">Profile</span>
-                </a>
+                </a> -->
+                <?php foreach ($iconfooter as $i): ?>
+                    <a href="<?= base_url() ?><?= $i->link ?><?= $nomeja ?>/Home/">
+                        <img src="<?= $i->image_path ?>" style="width: 25px;height: 25px; filter: grayscale(100%);">
+                    <?php if ($i->title == 'Cart'): ?>
+                       <span class="badge" style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; padding: 5px; font-size: 12px;"><?= $total_qty;?></span>
+                    <?php endif ?>
+                    </i>
+
+                        <span><?= $i->title ?></span>
+                    </a>
+                <?php endforeach ?>
             </nav>
         </footer>
     </div>

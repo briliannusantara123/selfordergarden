@@ -77,6 +77,7 @@ class Orderminuman extends CI_Controller {
 		}
 		$data['total_qty'] = $cart_total;
 		$data['iconfooter'] = $this->Admin_model->getIcon('footer');
+		$data['color'] = $this->Admin_model->getColor();
 			$this->load->view('orderminuman',$data);
 		
 	}
@@ -98,6 +99,7 @@ class Orderminuman extends CI_Controller {
 			'nomeja' => $nomeja,
 			'link' => $link,
 			'linkform' => $linkform,
+			'color' => $this->Admin_model->getColor(),
 		];
 		$this->load->view('detailmenu',$data);
 	}

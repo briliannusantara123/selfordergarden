@@ -53,9 +53,13 @@ class Admin_model extends CI_model {
 	}
 	public function getIcon($type)
 		{
-		    $this->db->select('d.*');
+			$this->db->select('d.*');
 		    $this->db->from('sh_m_setup_so d');
-		    $this->db->where('d.type', $type);
+			if ($type == 'add') {
+				$this->db->limit(2);
+			}else{
+				$this->db->where('d.type', $type);
+			}
 		    $this->db->where('d.is_active', 1);
 		    
 		    $query = $this->db->get()->result();
@@ -69,5 +73,13 @@ class Admin_model extends CI_model {
 			return $this->db->insert_id();
 		}
 		return $this->db->update('sh_kritik_saran', $data, $where);			
+	}
+	public function getColor()
+	{   
+        $this->db->select('o.*');
+        $this->db->from('sh_m_setup_color_so o');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        return $query->row();
 	}
 }

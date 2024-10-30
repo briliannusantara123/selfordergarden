@@ -44,8 +44,11 @@
                         <div class="row">
                         	<div class="col-md-12">
                                 <div class="card">
-                                    <h4 for="exampleColorInput" class="form-label" style="margin-left: 20px;margin-top: 10px;">Color Picker</h4>
-                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#198754" title="Choose your color">
+                                    <form action="<?= base_url() ?>index.php/admin/savecolor/<?= $color->id ?>" method="POST">
+                                        <h4 for="exampleColorInput" class="form-label" style="margin-left: 20px;margin-top: 10px;">Color Picker</h4>
+                                        <input type="color" name="color" class="form-control form-control-color" id="exampleColorInput" value="<?= $color->color ?>" title="Choose your color">
+                                        <button class="btn" style="float: right;margin-right: 20px;background-color: #198754;border-radius: 20px;color: white;margin-bottom: 10px;margin-top: 10px;">Save Color</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

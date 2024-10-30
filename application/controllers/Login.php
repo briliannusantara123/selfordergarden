@@ -6,6 +6,7 @@ class Login extends CI_Controller
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->model('Item_model');
+		$this->load->model('Admin_model');
 	}
 	public function index()
 	{
@@ -51,7 +52,7 @@ class Login extends CI_Controller
 				$this->_login($nomeja);
 		// }
 		}else{
-
+			$data['color'] = $this->Admin_model->getColor();
 			$this->load->view('loginOLD',$data);
 			
 		}

@@ -26,7 +26,7 @@
             title: 'Success!',
             text: isi,
             icon: 'success',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             })
          <?php } ?>
@@ -36,7 +36,7 @@
             title: 'Success!',
             text: isi,
             icon: 'success',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             })
          <?php } ?>
@@ -46,7 +46,7 @@
             title: 'Notification!',
             text: isi,
             icon: 'warning',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             })
          <?php } ?>
@@ -57,7 +57,7 @@
             title: 'Notification!',
             text: isi,
             icon: 'warning',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             },setTimeout(function(){ 
 
@@ -72,7 +72,7 @@
             title: 'Notification!',
             text: isi,
             icon: 'warning',
-            confirmButtonColor: "#198754",
+            confirmButtonColor: "<?= $color->color ?>",
             confirmButtonText: 'OK'
             },setTimeout(function(){ 
 

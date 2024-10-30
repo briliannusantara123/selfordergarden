@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hachi Garden | Self Order</title>
-    <link href="<?= base_url();?>assets/css/menu.css" rel="stylesheet">
+    <!-- <link href="<?= base_url();?>assets/css/menu.css" rel="stylesheet"> -->
     <link href="<?= base_url();?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   	<link href="<?= base_url();?>assets/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <?php $this->load->view('style/menu') ?>
+
      <style>
         /* CSS untuk mengganti font */
         body {
@@ -18,7 +20,7 @@
         width: 50px;
         height: 50px;
         border: solid 5px #ccc;
-        border-top-color: #198754;
+        border-top-color: <?= $color->color ?>;
         border-radius: 100%;
 
         position: fixed;
@@ -34,7 +36,7 @@
 
     .textloading {
         text-align: center;
-        color: #198754;
+        color: <?= $color->color ?>;
         position: fixed;
         font-weight: bold;
         font-size: 25px;
@@ -55,7 +57,7 @@
         width: 60px;
         height: 60px;
         border: solid 5px #ccc;
-        border-top-color: #198754;
+        border-top-color: <?= $color->color ?>;
         border-radius: 100%;
 
         position: fixed;

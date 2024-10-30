@@ -10,6 +10,7 @@ class Review extends CI_Controller {
         }
         $this->load->model('Review_model');
         $this->load->model('Item_model');
+        $this->load->model('Admin_model');
         
   		$id_customer = $this->session->userdata('id');
   		$nomeja = $this->session->userdata('nomeja');
@@ -35,6 +36,7 @@ class Review extends CI_Controller {
 		$id_customer = $this->session->userdata('id');
 		$count = $this->Review_model->verify($id_customer,$nomeja)->num_rows();
 		$status = $this->Review_model->verify($id_customer,$nomeja)->row();
+		$data['color'] = $this->Admin_model->getColor();
   		if ($count > 0) {
   			if ($status->status == 'Payment') {
   				redirect('index.php/login/logout');

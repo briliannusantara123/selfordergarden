@@ -1,3 +1,4 @@
+<style>
 * {
     margin: 0;
     padding: 0;
@@ -152,7 +153,7 @@ h2 {
 
 
 .active {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
     padding: 15px;
     border-radius: 10px;
     color: white;
@@ -200,7 +201,7 @@ h2 {
       font-size: 12px;
     }
     .menu-item .add-btn {
-      background-color: #198754;
+      background-color: <?= $color->color ?>;
       border-radius: 50%;
       padding: 5px;
       width: 35px;
@@ -329,10 +330,10 @@ footer nav a span {
     align-items: center;
 }
 .quantity-control button {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
     border: none;
     font-weight: bold;
-    color: #198754;
+    color: <?= $color->color ?>;
 }
 .quantity-control span {
     font-size: 1.2em;
@@ -357,7 +358,7 @@ footer nav a span {
 }*/
 
 .checkout-btn {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
     color: white;
     width: 100%;
     border-radius: 10px;
@@ -368,7 +369,7 @@ footer nav a span {
 }
 
 .checkout-btn:hover {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
 }
 
 .add-btn {
@@ -377,7 +378,7 @@ footer nav a span {
 }
 
 .add-btn:hover {
-    background-color: #198754;
+    background-color: <?= $color->color ?>;
 }
 
 .back-to-menu {
@@ -386,7 +387,7 @@ footer nav a span {
 }
 
 .back-to-menu a {
-    color: #198754;
+    color: <?= $color->color ?>;
     text-decoration: none;
 }
 
@@ -394,3 +395,4 @@ footer nav a span {
     text-decoration: underline;
 }
 
+</style>

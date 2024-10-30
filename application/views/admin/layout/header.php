@@ -102,10 +102,16 @@
                         <label style="color: #198754">Master Data</label>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/option') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Option & Add On</span></a>
+                        <a href="<?= base_url('index.php/Admin/option') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Option</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('index.php/Admin/addon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Add On</span></a>
                     </li>
                     <li class="nav-item pcoded-menu-caption">
                         <label style="color: #198754">Settings</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('index.php/Admin/users') ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Users</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('index.php/Admin/icon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Icon</span></a>
@@ -113,6 +119,7 @@
                     <li class="nav-item">
                         <a href="<?= base_url('index.php/Admin/color') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Color</span></a>
                     </li>
+                    
                     <!-- <li class="nav-item pcoded-menu-caption">
                         <label>Pages</label>
                     </li>
