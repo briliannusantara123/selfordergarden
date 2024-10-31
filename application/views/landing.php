@@ -22,7 +22,7 @@ body, .main-container {
     width: 50px;
     height: 50px;
     border: solid 5px #ccc;
-    border-top-color: #198754;
+    border-top-color: <?= $color->color ?>;
     border-radius: 100%;
     z-index: 7;
     animation: putar 1s linear infinite;

@@ -12,7 +12,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-file-text"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Option & Add On</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Add On</a></li>
                         </ul>
                     </div>
                 </div>
@@ -141,6 +141,7 @@
 				                                </tbody>
 				                            </table>
 				                        </div>
+				                        <?= $links2 ?>
 				                    </div>
 				                </div>
 				            </div>
@@ -234,32 +235,32 @@
 
 <div class="modal fade" id="exampleModaladdon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Addon</h1>
+    <div class="modal-content"  style="border-radius: 20px;">
+      <div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Add New Addon</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       	<form action="<?= base_url('index.php/admin/create_addon') ?>" method="POST">
 	        <div class="mb-3">
-			  <label for="formFile" class="form-label">Item Name</label>
-			  <select class="form-control" name="no">
+			  <label for="formFile" class="form-label">Item Name <span style="color: red;">*</span></label>
+			  <select class="form-control" name="no" required="">
 			  	<?php foreach ($item as $i): ?>
 			  		<option value="<?= $i->no ?>"><?= $i->description ?></option>
 			  	<?php endforeach ?>
 			  </select>
 			</div>
 			<div class="mb-3">
-			  <label for="formFile" class="form-label">Add On</label>
-			  <select class="form-control" name="addon">
+			  <label for="formFile" class="form-label">Add On <span style="color: red;">*</span></label>
+			  <select class="form-control" name="addon" required="">
 			  	<?php foreach ($item as $i): ?>
 			  		<option value="<?= $i->no ?>"><?= $i->description ?></option>
 			  	<?php endforeach ?>
 			  </select>
 			</div>
 			<div class="mb-3">
-			  <label for="formFile" class="form-label">Status</label>
-			  <select class="form-control" name="is_active">
+			  <label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+			  <select class="form-control" name="is_active" required="">
 			  	<option value="1">Active</option>
 			  	<option value="0">Inactive</option>
 			  </select>
@@ -277,33 +278,33 @@
 <?php foreach ($addon as $o): ?>
 	<div class="modal fade" id="exampleModaleditaddon<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Addon</h1>
+			<div class="modal-content"  style="border-radius: 20px;">
+      			<div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+        			<h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Edit Addon</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form action="<?= base_url('index.php/admin/update/<?= $o->id ?>') ?>" method="POST">
 						<input type="hidden" name="id" value="<?= $o->id ?>">
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Item Name</label>
-							<select class="form-control" name="no">
+							<label for="formFile" class="form-label">Item Name <span style="color: red;">*</span></label>
+							<select class="form-control" name="no" required="">
 								<?php foreach ($item as $i): ?>
 									<option value="<?= $i->no ?>" <?= $o->item_code == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Add On</label>
-							  <select class="form-control" name="option">
+							<label for="formFile" class="form-label">Add On <span style="color: red;">*</span></label>
+							  <select class="form-control" name="option" required="">
 							  	<?php foreach ($item as $i): ?>
 							  		<option value="<?= $i->no ?>" <?= $o->description == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
 							  	<?php endforeach ?>
 							  </select>
 						</div>
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Status</label>
-							<select class="form-control" name="is_active">
+							<label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+							<select class="form-control" name="is_active" required="">
 								<option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
 								<option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
 							</select>

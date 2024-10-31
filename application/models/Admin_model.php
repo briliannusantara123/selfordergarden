@@ -52,20 +52,32 @@ class Admin_model extends CI_model {
         return $query->result();
 	}
 	public function getIcon($type)
-		{
-			$this->db->select('d.*');
-		    $this->db->from('sh_m_setup_so d');
-			if ($type == 'add') {
-				$this->db->limit(2);
-			}else{
-				$this->db->where('d.type', $type);
-			}
-		    $this->db->where('d.is_active', 1);
-		    
-		    $query = $this->db->get()->result();
-		    return $query; 
+	{
+		$this->db->select('d.*');
+		   $this->db->from('sh_m_setup_so d');
+		if ($type == 'add') {
+			$this->db->limit(2);
+		}else{
+			$this->db->where('d.type', $type);
 		}
-
+		   $this->db->where('d.is_active', 1);
+		    
+		   $query = $this->db->get()->result();
+		   return $query; 
+	}
+	public function getIconSET($type)
+	{
+		$this->db->select('d.*');
+		   $this->db->from('sh_m_setup_so d');
+		if ($type == 'add') {
+			$this->db->limit(2);
+		}else{
+			$this->db->where('d.type', $type);
+		}
+		    
+		   $query = $this->db->get()->result();
+		   return $query; 
+	}
 		
 	public function save($data, $where='') {
 		if ($where == '') {
@@ -81,5 +93,47 @@ class Admin_model extends CI_model {
         $this->db->limit(1);
         $query = $this->db->get();
         return $query->row();
+	}
+	public function countUsers() {
+	    return $this->db->count_all_results('sh_user_so');
+	}
+	public function get_users($limit, $start)
+	{   
+        $this->db->select('o.*');
+        $this->db->from('sh_user_so o');
+        $this->db->limit($limit, $start);
+        $this->db->order_by('o.id','desc');
+        $query = $this->db->get();
+        return $query->result();
+	}
+	public function getEvent($limit, $start)
+	{
+		$this->db->select('o.*,c.customer_name,cb.cabang_name,t.id_table,t.status as st');
+        $this->db->from('sh_event_log o');
+        $this->db->join('sh_m_customer c', 'o.id_customer = c.id', 'left');
+        $this->db->join('sh_m_cabang cb', 'o.cabang = cb.id', 'left');
+        $this->db->join('sh_rel_table t', 'c.id = t.id_customer' , 'left');
+        $this->db->limit($limit, $start);
+        $this->db->where('event_type','Login SO');
+        $this->db->where('o.created_date',DATE('Y-m-d'));
+        $this->db->group_by('o.description');
+        $this->db->order_by('o.id','desc');
+        $query = $this->db->get();
+        return $query->result();
+	}
+	public function countEvent()
+	{
+		return $this->db->where('event_type','Login SO')->where('created_date',DATE('Y-m-d'))->count_all_results('sh_event_log');
+	}
+	public function cekpw($po,$usr)
+	{
+		$psw = md5($po);
+		$this->db->select('o.*');
+        $this->db->from('sh_user_so o');
+        $this->db->where('username',$usr);
+        $this->db->where('password',$psw);
+        $this->db->order_by('o.id','desc');
+        $query = $this->db->get();
+        return $query->result();
 	}
 }

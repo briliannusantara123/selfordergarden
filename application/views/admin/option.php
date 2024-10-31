@@ -12,7 +12,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-file-text"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Option & Add On</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Option</a></li>
                         </ul>
                     </div>
                 </div>
@@ -154,28 +154,28 @@
 </div>
 <div class="modal fade" id="exampleModaloption" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Option</h1>
+    <div class="modal-content"  style="border-radius: 20px;">
+      <div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Add New Option</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       	<form action="<?= base_url('index.php/admin/create_option') ?>" method="POST">
 	        <div class="mb-3">
-			  <label for="formFile" class="form-label">Item Name</label>
-			  <select class="form-control" name="no">
+			  <label for="formFile" class="form-label">Item Name <span style="color: red;">*</span></label>
+			  <select class="form-control" name="no" required="">
 			  	<?php foreach ($item as $i): ?>
 			  		<option value="<?= $i->no ?>"><?= $i->description ?></option>
 			  	<?php endforeach ?>
 			  </select>
 			</div>
 			<div class="mb-3">
-			  <label for="formFile" class="form-label">Option</label>
+			  <label for="formFile" class="form-label">Option <span style="color: red;">*</span></label>
 			  <input class="form-control" type="text" name="option" required="">
 			</div>
 			<div class="mb-3">
-			  <label for="formFile" class="form-label">Status</label>
-			  <select class="form-control" name="is_active">
+			  <label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+			  <select class="form-control" name="is_active" required="">
 			  	<option value="1">Active</option>
 			  	<option value="0">Inactive</option>
 			  </select>
@@ -193,9 +193,9 @@
 <?php foreach ($option as $o): ?>
 	<div class="modal fade" id="exampleModaleditoption<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Edit Option</h1>
+			<div class="modal-content"  style="border-radius: 20px;">
+      			<div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+        			<h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Edit Option</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -203,20 +203,20 @@
 					<form action="<?= base_url('index.php/admin/update/<?= $o->id ?>') ?>" method="POST">
 						<input type="hidden" name="id" value="<?= $o->id ?>">
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Item Name</label>
-							<select class="form-control" name="no">
+							<label for="formFile" class="form-label">Item Name <span style="color: red;">*</span></label>
+							<select class="form-control" name="no" required="">
 								<?php foreach ($item as $i): ?>
 									<option value="<?= $i->no ?>" <?= $o->item_code == $i->no ? 'selected' : '' ?>><?= $i->description ?></option>
 								<?php endforeach ?>
 							</select>
 						</div>
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Option</label>
+							<label for="formFile" class="form-label">Option <span style="color: red;">*</span></label>
 							<input class="form-control" type="text" name="option" value="<?= $o->description ?>" required="">
 						</div>
 						<div class="mb-3">
-							<label for="formFile" class="form-label">Status</label>
-							<select class="form-control" name="is_active">
+							<label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+							<select class="form-control" name="is_active" required="">
 								<option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
 								<option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
 							</select>

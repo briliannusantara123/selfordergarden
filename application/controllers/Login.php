@@ -214,44 +214,103 @@ class Login extends CI_Controller
 		
 	}
 	public function loginadmin() {
-        // Ambil input dari form
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-        
-        // Cari user berdasarkan username
-        $this->db->where('username', $username);
-        $user = $this->db->get('sh_user_so')->row();
-        
-        if ($user) {
-            // Verifikasi password yang diinput dengan hash yang ada di database
-            if (password_verify($password, $user->password)) {
-            	$data = [
-					'username' => $user->username,
-					'level' => $user->level,
-					'id' => $user->id,
-				];
-				$this->session->set_userdata($data);
-                $this->session->set_flashdata('success','Login Successfully');
-				redirect('Admin');
-            } else {
-                $this->session->set_flashdata('error','Username atau password salah');
-				$this->load->view('admin/loginAdmin');	
-            }
-        } else {
-            // User tidak ditemukan
-            echo "Username tidak ditemukan!";
-        }
-    }
+	    $username = $this->input->post('username');
+	    $password = $this->input->post('password');
+	    $this->db->where('username', $username);
+	    $user = $this->db->get('sh_user_so')->row();
+	    
+	    if ($user) {
+	        if (md5($password) == $user->password) {
+	            $data = [
+	                'usernameadmin' => $user->username,
+	                'role' => $user->role,
+	                'id' => $user->id,
+	            ];
+	            $this->session->set_userdata($data);
+	            $this->session->set_flashdata('success', 'Login Successfully');
+	            redirect('Admin');
+	        } else {
+	            $this->session->set_flashdata('error', 'Username atau password salah');
+	            $this->load->view('admin/loginAdmin');    
+	        }
+	    } else {
+	        echo "Username tidak ditemukan!";
+	    }
+	}
+
 	public function logoutAdmin($nm=null,$pm=NULL)
 	{
 		$cs = $this->session->userdata('id');
 		$id_customer = $this->session->userdata('id');
 		$ip_address = $this->input->ip_address();
-		$this->session->unset_userdata('username');
-		$this->session->unset_userdata('level');
+		$this->session->unset_userdata('usernameadmin');
+		$this->session->unset_userdata('role');
 		$this->session->unset_userdata('id');
 		$this->session->set_flashdata('success','Successfully Logged Out');
 		redirect('login/admin');
 	}
+	public function changepw()
+	{
+		$po = $this->input->post('passwordOLD');
+		$usr = $this->input->post('username');
+		$cekpw = $this->Admin_model->cekpw($po,$usr);
+		if ($cekpw) {
+			$data = [
+				'password' => md5($this->input->post('password')),
+			];
+			$this->db->where('username',$usr);
+			$this->db->where('password',md5($po));
+			$this->db->update('sh_user_so',$data);
+			$this->session->set_flashdata('success','Password has been successfully changed');
+		}else{
+			$this->session->set_flashdata('error','The current password you entered is incorrect.');
+		}
+		redirect('admin');
+	}
+	public function loginremote($nomeja,$ip) {
+	    $date = date('Y-m-d');
+		$where = "sh_rel_table.id_table = '".$nomeja."' and left(created_date,10) ='".$date."' and status in('Order','Dining','Billing')";
+		$this->db->select('*');
+		$this->db->from('sh_rel_table');
+		$this->db->join('sh_m_customer', 'sh_m_customer.id = sh_rel_table.id_customer');
+		$this->db->where($where);
+		$log = $this->db->get()->row_array();
+			if ($log) {
+				$data = [
+					'username' => $log['customer_name'],
+					'no_telp' => $log['no_telp'],
+					'id' => $log['id'],
+					'nomeja' => $nomeja,
+					'user_order_id' => $ip
+				];
+				$a = $nomeja;
+				$this->session->set_userdata($data);
+				// $id_customer = $this->session->userdata('id');
+				// $id_trans = $this->db->get_Where('sh_t_transactions', array('id_customer'=> $id_customer))->row();
+				// $cabang = $this->db->order_by('id',"desc")
+			 //  			->limit(1)
+			 //  			->get('sh_m_cabang')
+			 //  			->row('id');
+			 //  	$ip_address = $ip;
+			 //  	$cust = $this->session->userdata('username');
+				// $dataevent = [
+				// 	'event_type' => 'Login SO',
+				// 	'cabang' => $cabang,
+				// 	'id_trans' => $id_trans->id,
+				// 	'id_customer' => $this->session->userdata('id'),
+				// 	'event_date' => date('Y-m-d H:i:s'),
+				// 	'user_by' => $this->session->userdata('username'),
+				// 	'description' => 'Melakukan Login dengan IP: '.$ip_address,
+				// 	'created_date' => date('Y-m-d'),
+				// ];
+				// $result = $this->db->insert('sh_event_log',$dataevent);
+				// $this->session->set_flashdata('success','Login Successfully, Please Order !');
+				redirect('selforder/landing/'.$a);
+			}else{
+				$a = $nomeja;
+				// $this->session->set_flashdata('error','Wrong Passcode !');
+				redirect('login/log/'.$a);
+			}
+	}
 }
- ?>
+?>

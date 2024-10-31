@@ -8,11 +8,11 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard Analytics</h5>
+                            <h5 class="m-b-10">Navigation</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
                         </ul>
                     </div>
                 </div>
@@ -21,56 +21,134 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
-            <div class="col-lg-7 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <!-- support-section start -->
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card support-bar overflow-hidden">
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
                             <div class="card-body pb-0">
-                                <h2 class="m-0">350</h2>
-                                <span class="text-c-blue">Support Requests</span>
-                                <p class="mb-3 mt-3">Total number of support requests that come in.</p>
+                                <h2 class="text-c-blue text-center">Option</h2>
                             </div>
                             <div id="support-chart"></div>
                             <div class="card-footer bg-primary text-white">
                                 <div class="row text-center">
                                     <div class="col">
-                                        <h4 class="m-0 text-white">10</h4>
-                                        <span>Open</span>
+                                        <h4 class="m-0 text-white"><?= $optionA ?></h4>
+                                        <span>Active</span>
                                     </div>
                                     <div class="col">
-                                        <h4 class="m-0 text-white">5</h4>
-                                        <span>Running</span>
+                                        <h4 class="m-0 text-white"><?= $optionI ?></h4>
+                                        <span>Inactive</span>
                                     </div>
-                                    <div class="col">
-                                        <h4 class="m-0 text-white">3</h4>
-                                        <span>Solved</span>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card support-bar overflow-hidden">
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
                             <div class="card-body pb-0">
-                                <h2 class="m-0">350</h2>
-                                <span class="text-c-green">Support Requests</span>
-                                <p class="mb-3 mt-3">Total number of support requests that come in.</p>
+                                <h2 class="text-c-green text-center">Addon</h2>
+                                
                             </div>
                             <div id="support-chart1"></div>
                             <div class="card-footer bg-success text-white">
                                 <div class="row text-center">
                                     <div class="col">
-                                        <h4 class="m-0 text-white">10</h4>
-                                        <span>Open</span>
+                                        <h4 class="m-0 text-white"><?= $addonA ?></h4>
+                                        <span>Active</span>
                                     </div>
                                     <div class="col">
-                                        <h4 class="m-0 text-white">5</h4>
-                                        <span>Running</span>
+                                        <h4 class="m-0 text-white"><?= $addonI ?></h4>
+                                        <span>Inactive</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
+                            <div class="card-body pb-0">
+                                <h2 class="text-c-yellow text-center">Users</h2>
+                            </div>
+                            <div id="support-chart1"></div>
+                            <div class="card-footer bg-c-yellow text-white">
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <h4 class="m-0 text-white"><?= $usersA ?></h4>
+                                        <span>Active</span>
                                     </div>
                                     <div class="col">
-                                        <h4 class="m-0 text-white">3</h4>
-                                        <span>Solved</span>
+                                        <h4 class="m-0 text-white"><?= $usersI ?></h4>
+                                        <span>Inactive</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
+                            <div class="card-body pb-0">
+                                <h2 class="text-center" style="color: #eb6e34">Icon Home</h2>
+                            </div>
+                            <div id="support-chart1"></div>
+                            <div class="card-footer text-white" style="background-color: #eb6e34">
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <h4 class="m-0 text-white"><?= $ichA ?></h4>
+                                        <span>Active</span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="m-0 text-white"><?= $ichI ?></h4>
+                                        <span>Inactive</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
+                            <div class="card-body pb-0">
+                                <h2 class="text-c-red text-center">Icon Footer</h2>
+                            </div>
+                            <div id="support-chart1"></div>
+                            <div class="card-footer bg-c-red text-white">
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <h4 class="m-0 text-white"><?= $icfA ?></h4>
+                                        <span>Active</span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="m-0 text-white"><?= $icfI ?></h4>
+                                        <span>Inactive</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card support-bar overflow-hidden" style="border-radius: 10px;">
+                            <div class="card-body pb-0">
+                                <h2 class="text-center" style="color:<?= $color->color ?>">Self-Order Color</h2>
+                            </div>
+                            <div id="support-chart1"></div>
+                            <div class="card-footer text-white" style="background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);">
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <h4 class="m-0 text-white">Light</h4>
+                                        <span><?= $color->lightcolor ?></span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="m-0 text-white">Medium</h4>
+                                        <span><?= $color->color ?></span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="m-0 text-white">Dark</h4>
+                                        <span><?= $color->darkcolor ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -79,121 +157,16 @@
                 </div>
                 <!-- support-section end -->
             </div>
-            <div class="col-lg-5 col-md-12">
-                <!-- page statustic card start -->
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-yellow">$30200</h4>
-                                        <h6 class="text-muted m-b-0">All Earnings</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-bar-chart-2 f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-yellow">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-up text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-green">290+</h4>
-                                        <h6 class="text-muted m-b-0">Page Views</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-file-text f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-green">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-up text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-red">145</h4>
-                                        <h6 class="text-muted m-b-0">Task</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-calendar f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-red">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-down text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row align-items-center">
-                                    <div class="col-8">
-                                        <h4 class="text-c-blue">500</h4>
-                                        <h6 class="text-muted m-b-0">Downloads</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <i class="feather icon-thumbs-down f-28"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-c-blue">
-                                <div class="row align-items-center">
-                                    <div class="col-9">
-                                        <p class="text-white m-b-0">% change</p>
-                                    </div>
-                                    <div class="col-3 text-right">
-                                        <i class="feather icon-trending-down text-white f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- page statustic card end -->
-            </div>
+
             <!-- prject ,team member start -->
-            <div class="col-xl-6 col-md-12">
-                <div class="card table-card">
-                    <div class="card-header">
-                        <h5>Projects</h5>
+            <div class="col-xl-12 col-md-12" >
+                <div class="card table-card" style="border-radius: 10px;">
+                    <div class="card-header" style="background-color: #198754;border-radius: 10px;">
+                        <h4 style="color: white;"><span style="background-color: red;border-radius: 100%;padding: 5px 10px;"><?= $count ?></span> Customers Use Self Order</h4>
                         <div class="card-header-right">
                             <div class="btn-group card-option">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="feather icon-more-horizontal"></i>
+                                    <i class="feather icon-more-horizontal" style="color: white;"></i>
                                 </button>
                                 <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
@@ -210,107 +183,50 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                            Assigned
+                                            Customer Name
                                         </th>
-                                        <th>Name</th>
-                                        <th>Due Date</th>
-                                        <th class="text-right">Priority</th>
+                                        <th>IP</th>
+                                        <th>Table Number</th>
+                                        <th class="text-right">Login Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                            <div class="d-inline-block align-middle">
-                                                <img src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="user image" class="img-radius wid-40 align-top m-r-15">
-                                                <div class="d-inline-block">
-                                                    <h6>John Deo</h6>
-                                                    <p class="text-muted m-b-0">Graphics Designer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Able Pro</td>
-                                        <td>Jun, 26</td>
-                                        <td class="text-right"><label class="badge badge-light-danger">Low</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                            <div class="d-inline-block align-middle">
-                                                <img src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="user image" class="img-radius wid-40 align-top m-r-15">
-                                                <div class="d-inline-block">
-                                                    <h6>Jenifer Vintage</h6>
-                                                    <p class="text-muted m-b-0">Web Designer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Mashable</td>
-                                        <td>March, 31</td>
-                                        <td class="text-right"><label class="badge badge-light-primary">high</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                            <div class="d-inline-block align-middle">
-                                                <img src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="user image" class="img-radius wid-40 align-top m-r-15">
-                                                <div class="d-inline-block">
-                                                    <h6>William Jem</h6>
-                                                    <p class="text-muted m-b-0">Developer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Flatable</td>
-                                        <td>Aug, 02</td>
-                                        <td class="text-right"><label class="badge badge-light-success">medium</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                            <div class="d-inline-block align-middle">
-                                                <img src="<?= base_url('assets/assetsadmin/images/user/avatar-1.jpg'); ?>" alt="user image" class="img-radius wid-40 align-top m-r-15">
-                                                <div class="d-inline-block">
-                                                    <h6>David Jones</h6>
-                                                    <p class="text-muted m-b-0">Developer</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Guruable</td>
-                                        <td>Sep, 22</td>
-                                        <td class="text-right"><label class="badge badge-light-primary">high</label></td>
-                                    </tr>
+                                    <?php foreach ($event as $e): 
+                                        $ip = '';
+                                                if (preg_match('/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/', $e->description, $matches)) {
+                                                    $ip = $matches[0]; // Menyimpan IP yang ditemukan
+                                                }
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <a href="<?= base_url() ?>index.php/login/loginremote/<?= $e->id_table ?>/<?= $ip ?>" target="_blank">
+                                                    <div class="d-inline-block align-middle">
+                                                        <img src="<?= base_url(); ?>assets/userkosong.png" alt="user image" class="img-radius wid-45 align-top m-r-15">
+                                                        <div class="d-inline-block">
+                                                            <h6><?= $e->customer_name ?></h6>
+                                                            <p class="text-muted m-b-0"><?= $e->cabang_name ?></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td><?= $ip ?></td>
+                                            <td><?= $e->id_table ?></td>
+                                            <?php if (in_array($e->st, ['Order', 'Dining', 'Billing'])): ?>
+                                                <td class="text-right"><label class="badge badge-light-success"><?= $e->event_date ?></label></td>
+                                            <?php else: ?>
+                                                <td class="text-right"><label class="badge badge-light-danger"><?= $e->event_date ?></label></td>
+                                            <?php endif ?>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <br>
+                    <?= $links ?>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-12">
+            <!-- <div class="col-xl-6 col-md-12">
                 <div class="card latest-update-card">
                     <div class="card-header">
                         <h5>Latest Updates</h5>
@@ -387,9 +303,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="col-lg-8 col-md-12">
+            <!-- <div class="col-lg-8 col-md-12">
                 <div class="card table-card review-card">
                     <div class="card-header borderless ">
                         <h5>Customer Reviews</h5>
@@ -533,7 +449,7 @@
                     </div>
                     <button class="btn btn-success btn-block">Download Overall Report</button>
                 </div>
-            </div>
+            </div> -->
             <!-- Latest Customers end -->
         </div>
         <!-- [ Main Content ] end -->

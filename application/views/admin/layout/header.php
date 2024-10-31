@@ -25,7 +25,19 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="<?= base_url('assets/assetsadmin/css/style.css'); ?>">
+    <style type="text/css">
+        .icon-container {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
+            height: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
+            border-radius: 50%; /* Membuat lingkaran */
+            background-color: <?= $color->color ?>; /* Warna biru */
+            color: white; /* Warna ikon */
+        }
 
+    </style>
     
     
 
@@ -48,13 +60,15 @@
                     <div class="main-menu-header">
                         <img class="img-radius" src="<?= base_url('assets/userkosong.png'); ?>" alt="User-Profile-Image">
                         <div class="user-details">
-                            <div id="more-details"><?= $this->session->userdata('username') ?><i class="fa fa-caret-down"></i></div>
+                            <div id="more-details"><?= $this->session->userdata('usernameadmin') ?><i class="fa fa-caret-down"></i></div>
                         </div>
                     </div>
                     <div class="collapse" id="nav-user-link">
                         <ul class="list-unstyled">
-                            <li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
-                            <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
+                            <!-- <li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
+                            <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li> -->
+                            
+                            <li class="list-group-item"><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="feather icon-lock m-r-5"></i>Change Password</a></li>
                             <li class="list-group-item"><a href="<?= base_url() ?>index.php/login/logoutadmin"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
                         </ul>
                     </div>
@@ -65,7 +79,7 @@
                         <label style="color: #198754">Navigation</label>
                     </li>
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                        <a href="<?= base_url('index.php/Admin') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
                     <!-- <li class="nav-item pcoded-hasmenu">
                         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
@@ -98,27 +112,33 @@
                             <li><a href="bc_extra.html">Other</a></li>
                         </ul>
                     </li> -->
-                    <li class="nav-item pcoded-menu-caption">
-                        <label style="color: #198754">Master Data</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/option') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Option</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/addon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Add On</span></a>
-                    </li>
-                    <li class="nav-item pcoded-menu-caption">
-                        <label style="color: #198754">Settings</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/users') ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Users</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/icon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Icon</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('index.php/Admin/color') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Color</span></a>
-                    </li>
+                    <?php if ($this->session->userdata('role') == 'operation' || $this->session->userdata('role') == 'admin'): ?>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label style="color: #198754">Master Data</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('index.php/Admin/option') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Option</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('index.php/Admin/addon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Add On</span></a>
+                        </li>
+                    <?php endif ?>
+                    <?php if ($this->session->userdata('role') == 'marketing' || $this->session->userdata('role') == 'admin'): ?>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label style="color: #198754">Settings</label>
+                        </li>
+                        <?php if ($this->session->userdata('role') == 'admin'): ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('index.php/Admin/users') ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">Users</span></a>
+                            </li>
+                        <?php endif ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('index.php/Admin/icon') ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Icon</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('index.php/Admin/color') ?>" class="nav-link "><span class="pcoded-micon"><div class="icon-container"><i class="feather icon-map"></i></div></span><span class="pcoded-mtext">Color</span></a>
+                        </li>
+                    <?php endif ?>
                     
                     <!-- <li class="nav-item pcoded-menu-caption">
                         <label>Pages</label>
@@ -162,19 +182,9 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
-                            <div class="search-bar">
-                                <input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
+                    
                     <ul class="navbar-nav ml-auto">
-                        <li>
+                        <!-- <li>
                             <div class="dropdown">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right notification">
@@ -193,7 +203,7 @@
                                             <div class="media">
                                                 <img class="img-radius" src="<?= base_url('assets/userkosong.png'); ?>" alt="Generic placeholder image">
                                                 <div class="media-body">
-                                                    <p><strong><?= $this->session->userdata('username') ?></strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
+                                                    <p><strong><?= $this->session->userdata('usernameadmin') ?></strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
                                                     <p>New ticket Added</p>
                                                 </div>
                                             </div>
@@ -234,24 +244,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <li>
                             <div class="dropdown drp-user">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="feather icon-user"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right profile-notification">
+                                <div class="dropdown-menu dropdown-menu-right profile-notification" style="border-radius: 10px;">
                                     <div class="pro-head">
                                         <img src="<?= base_url('assets/userkosong.png'); ?>" class="img-radius" alt="User-Profile-Image">
-                                        <span><?= $this->session->userdata('username') ?></span>
+                                        <span><?= $this->session->userdata('usernameadmin') ?></span>
                                         <a href="<?= base_url() ?>index.php/login/logoutadmin" class="dud-logout" title="Logout">
                                             <i class="feather icon-log-out"></i>
                                         </a>
                                     </div>
                                     <ul class="pro-body">
-                                        <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                                        <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                                        <!-- <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
+                                        <!-- <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                                        <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li> -->
+                                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="feather icon-lock"></i> Change Password</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -261,3 +271,30 @@
                 
             
     </header>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content"  style="border-radius: 20px;">
+            <div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Change Password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="<?= base_url() ?>index.php/login/changepw" method="POST">
+              <div class="modal-body">
+                <input type="hidden" name="username" value="<?= $this->session->userdata('usernameadmin') ?>">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Current Password <span style="color: red;">*</span></label>
+                    <input type="password" name="passwordOLD" class="form-control" required="">
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">New Password <span style="color: red;">*</span></label>
+                    <input type="password" name="password" class="form-control" required="">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" style="background-color: #198754">Save changes</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>

@@ -11,7 +11,7 @@
                             <h5 class="m-b-10">Settings</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-file-text"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-pie-chart"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Icon</a></li>
                         </ul>
                     </div>
@@ -195,9 +195,9 @@
 <?php foreach ($home as $o): ?>
     <div class="modal fade" id="exampleModaledithome<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Icon Home</h1>
+            <div class="modal-content"  style="border-radius: 20px;">
+                <div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Edit Icon Home</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -205,8 +205,8 @@
                     <form action="<?= base_url('index.php/admin/update_icon/') ?><?= $o->id ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= $o->id ?>">
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Title</label>
-                            <input type="text" name="title" class="form-control" value="<?= $o->title ?>">
+                            <label for="formFile" class="form-label">Title <span style="color: red;">*</span></label>
+                            <input type="text" name="title" class="form-control" value="<?= $o->title ?>" required>
                         </div>
                         <!-- <div class="mb-3">
                             <label for="formFile" class="form-label">Link</label>
@@ -215,12 +215,12 @@
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Icon Path</label>
                             <input class="form-control" type="file" name="icon">
-                            <span style="color: red;">The icon size is 512px x 512px.</span>
-                            <input class="form-control" type="hidden" name="iconOLD" value="<?= $o->image_path ?>" required="">
+                            <span style="color: red;">Icon size must be 512px x 512px and a maximum of 1 MB in PNG or JPG format.</span>
+                            <input class="form-control" type="hidden" name="iconOLD" value="<?= $o->image_path ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Status</label>
-                            <select class="form-control" name="is_active">
+                            <label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+                            <select class="form-control" name="is_active" required="">
                                 <option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
                                 <option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
                             </select>
@@ -279,9 +279,9 @@
 <?php foreach ($footer as $o): ?>
     <div class="modal fade" id="exampleModaleditfooter<?= $o->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Icon Footer</h1>
+            <div class="modal-content"  style="border-radius: 20px;">
+                <div class="modal-header" style="background-color: #198754;border-radius: 20px;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">Edit Icon Footer</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -289,22 +289,22 @@
                     <form action="<?= base_url('index.php/admin/update_icon/') ?><?= $o->id ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= $o->id ?>">
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Title</label>
-                            <input type="text" name="title" class="form-control" value="<?= $o->title ?>">
+                            <label for="formFile" class="form-label">Title <span style="color: red;">*</span></label>
+                            <input type="text" name="title" class="form-control" value="<?= $o->title ?>" required>
                         </div>
                         <!-- <div class="mb-3">
                             <label for="formFile" class="form-label">Link</label>
                             <input class="form-control" type="text" name="link" value="<?= $o->link ?>" required="">
                         </div> -->
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Icon Path</label>
-                            <input class="form-control" type="file" name="icon">
+                            <label for="formFile" class="form-label">Icon Path </label>
+                            <input class="form-control" type="file" name="icon" >
                             <span style="color: red;">The icon size is 512px x 512px.</span>
-                            <input class="form-control" type="hidden" name="iconOLD" value="<?= $o->image_path ?>" required="">
+                            <input class="form-control" type="hidden" name="iconOLD" value="<?= $o->image_path ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Status</label>
-                            <select class="form-control" name="is_active">
+                            <label for="formFile" class="form-label">Status <span style="color: red;">*</span></label>
+                            <select class="form-control" name="is_active" required="">
                                 <option value="1" <?= $o->is_active == 1 ? 'selected' : '' ?>>Active</option>
                                 <option value="0" <?= $o->is_active == 0 ? 'selected' : '' ?>>Inactive</option>
                             </select>

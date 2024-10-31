@@ -11,7 +11,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(to right, #00B050, #198754, #0b452a);
+        background: linear-gradient(to right, <?= $color->lightcolor ?>, <?= $color->color ?>, <?= $color->darkcolor ?>);
         padding: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 4;
@@ -35,7 +35,7 @@
         left: 0;
         width: 100vw;
         height: 150px;
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         padding-left: 20px;
         z-index: 3; /* Z-index lebih tinggi untuk menampilkan di atas bulat */
     }
@@ -64,7 +64,7 @@
         left: 0;
         width: 100vw;
         height: 130px;
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -113,7 +113,7 @@
         top: -30px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #198754;
+        background-color: <?= $color->color ?>;
         color: white;
         border-radius: 50%;
         padding: 17px;

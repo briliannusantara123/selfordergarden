@@ -7,7 +7,7 @@
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  background-image: url("<?= base_url();?>assets/userkosong.png"), linear-gradient(rgba(25, 135, 84, 1), rgba(25, 135, 84, 1));
+  background-image: url("<?= base_url();?>assets/userkosong.png"), linear-gradient(rgba(<?= $color->color ?>, <?= $color->color ?>, <?= $color->color ?>, 1), rgba(<?= $color->color ?>, <?= $color->color ?>, <?= $color->color ?>, 1));
   
   background-size: cover;
   background-position: center;
@@ -255,7 +255,7 @@ input[type=password]:placeholder {
 }
 
 h1{
-    color: #198754;
+    color: <?= $color->color ?>;
 }
 
 /* OTHERS */
@@ -293,7 +293,7 @@ h1{
     <!-- Login Form -->
     <form action="<?= base_url() ?>index.php/Login/log/<?= $nomeja ?>" method="post">
       <input type="password" id="login" class="fadeIn second" name="passcode" placeholder="Enter PassCode" required="">
-      <button class="btn" style="color: white;margin-bottom: 20px; padding-right: 50px;padding-left: 50px; margin-top: 10px;background-color:#198754">Log In</button>
+      <button class="btn" style="color: white;margin-bottom: 20px; padding-right: 50px;padding-left: 50px; margin-top: 10px;background-color:<?= $color->color ?>">Log In</button>
        <!-- <button type="button" id="scan-btn">Open Camera to Scan</button> -->
     </form>
     <div class="center">

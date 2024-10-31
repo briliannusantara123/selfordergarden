@@ -1,4 +1,16 @@
 <?php $this->load->view('admin/layout/header') ?>
+<style type="text/css">
+    .icon-container {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
+            height: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
+            border-radius: 50%; /* Membuat lingkaran */
+            background-color: <?= $color->color ?>; /* Warna biru */
+            color: white; /* Warna ikon */
+        }
+</style>
 
 <div class="pcoded-main-container">
     <div class="pcoded-content">
@@ -11,7 +23,7 @@
                             <h5 class="m-b-10">Settings</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-file-text"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.html"><div class="icon-container"><i class="feather icon-map"></i></div></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Icon</a></li>
                         </ul>
                     </div>

@@ -64,6 +64,7 @@ public function __construct() {
 		$data = [
 			'username' => $this->session->userdata('username'),
 			'nomeja' => $this->session->userdata('nomeja'),
+			'color' => $this->Admin_model->getColor(),
 		];
 		$this->load->view('landing',$data);
 	}
